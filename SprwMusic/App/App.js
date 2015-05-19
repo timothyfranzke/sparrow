@@ -1,0 +1,1 @@
+﻿var sparrowApp = angular.module('sparrowApp', ['ui.router', 'angularFileUpload']);

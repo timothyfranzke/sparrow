@@ -1,0 +1,49 @@
+﻿<h3>Artist Portal</h3>
+<md-button>Create Track</md-button>
+<ui-view></ui-view>
+<input type="text" ng-model="track.TrackName" placeholder="Title"/>
+<input type="date" ng-model="track.ReleaseDate" placeholder="Release Date"/>
+<input type="file" nv-file-select name="Track" ng-click="init()" uploader="uploader"/><br/>
+<input type="submit" ng-click="uploadTrack(track)" value="Upload"/>
+
+<div nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">
+    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+        Another drop zone with its own settings
+    </div>
+</div>
+<ul>
+    <li ng-repeat="item in uploader.queue">
+        Name: <span ng-bind="item.file.name"></span><br/>
+        <input type="text" ng-model="item.formData.TrackName" value="Hello"/>
+        <button ng-click="item.upload()">upload</button>
+    </li>
+</ul>
+<div class="progress" style="">
+    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+</div>
+<div>
+    <h3>{{selectedArtist.Artist.AristName}}</h3>
+    <h3>{{sArtist.ArtistName}}</h3>
+    <select ng-options="i.ArtistId as i.ArtistName for i in artists" ng-model="track.ArtistId" ng-change="selectArtist(track.ArtistId)"></select>
+</div>
+<div ng-show="showAlbumList">
+    <h4>Albums</h4>
+    <select ng-options="i.AlbumId as i.AlbumName for i in selectedArtist.Artist.Albums" ng-model="track.AlbumId" ng-change="selectAlbum(track.AlbumId)"></select>
+</div>
+
+<div ng-repeat="track in selectedTracks">
+    <h2>{{track.TrackName}}</h2>
+    <audio controls>
+        <source src="{{track.URL}}" type="audio/mp3">
+        Your browser does not support the audio element.
+
+    </audio>
+    <audio data-ng-src=""></audio>
+</div>
+
+<input type="file" nv-file-select="" uploader="uploader" />
+<div class="progress" style="margin-bottom: 0;">
+    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+</div>
+
+

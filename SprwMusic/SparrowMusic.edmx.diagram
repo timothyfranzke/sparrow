@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fadbd382619f4e09a474d88e01017cda" Name="Diagram1">
+        <EntityTypeShape EntityType="SparrowMusicModel.ARTIST_BLOG" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_ALBUM" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_ALBUM_IMG" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_ARTIST" Width="1.5" PointX="0.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_ARTIST_EVENT" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_ARTIST_IMG" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_ARTIST_MEMBER" Width="1.5" PointX="8" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_GENRE" Width="1.5" PointX="3" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_POP_ARTIST" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_ROLE" Width="1.5" PointX="5.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_USER" Width="1.5" PointX="5.75" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_DISLIKES" Width="1.5" PointX="7.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_LIKES" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_PLAY_THROUGH" Width="1.5" PointX="7.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_PLAYS" Width="1.5" PointX="7.5" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_SELECT" Width="1.5" PointX="7.5" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_SKIPS" Width="1.5" PointX="7.5" PointY="28.75" IsExpanded="true" />
+        <AssociationConnector Association="SparrowMusicModel.FK__ARTIST_BL__ARTIS__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_ALBU__ALBUM__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_ALBU__ARTIS__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__ALBUM__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_ARTI__ARTIS__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_ARTI__ARTIS__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_ARTI__ARTIS__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__ARTIS__164452B1" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_ARTI__ROLE___32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_ARTI__USER___31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__DISLI__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__LIKE___21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__PLAY___182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__PLAY___1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__SELEC__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__SKIP___1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.SPRW_POP_ARTIST_GENRE" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.SPRW_ARTIST_GENRE" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.SPRW_ARTIST_POP_ARTIST" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

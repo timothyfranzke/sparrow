@@ -1,0 +1,29 @@
+﻿<div>{{something}}</div>
+<div class="fieldBlock">
+    <label for="userFirstName">First Name</label>
+    <input id="userFirstName" ng-model="newUser.FirstName" type="text" />
+</div>
+<div class="fieldBlock">
+    <label for="userLastName">Last Name</label>
+    <input id="userLastName" ng-model="newUser.LastName" type="text" />
+</div>
+<div class="fieldBlock">
+    <label for="userEmail">Email</label>
+    <input id="userEmail" type="email" ng-model="newUser.Email" />
+</div>
+<span style="color:red" ng-show="showErrorEmail">Email does not match</span>
+<div class="fieldBlock">
+    <label for="userConfirmEmail">Confirm Email</label>
+    <input id="userConfirmEmail" type="email" ng-model="Confirm.Email" />
+</div>
+<div class="fieldBlock">
+    <label for="userPassword">Password</label>
+    <input id="userPassword" type="password" ng-model="newUser.Password" />
+</div>
+<span style="color:red" ng-show="showErrorPassword">Passwords ddo not match</span>
+<div class="fieldBlock">
+    <label for="userConfirmPassword">Confirm Password</label>
+    <input id="userConfirmPassword" type="password" ng-model="Confirm.Password" />
+</div>
+
+<input type="button" ng-click="CreateUser(newUser, Confirm)" value="Register" />

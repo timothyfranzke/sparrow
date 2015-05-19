@@ -1,0 +1,15 @@
+﻿
+
+
+<label for="artist">Description</label>
+<input id="artist"type="text" ng-model="artist.Name"/>
+<label for="description">Description</label>
+<input id="description" type="text" ng-model="artist.Description"/>
+<input type="submit" ng-click="createArtist(artist)" value="Create"/>
+
+<br/>
+<br/>
+<input type="text" ng-model="album.AlbumName" />
+<input type="text" ng-model="album.AlbumDesciption" />
+<input type="date" ng-model="album.ReleaseDate"/>
+<input type="submit" ng-click="createAlbum(album)" value="Create Album" />

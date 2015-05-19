@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SparrowMusicModelStoreContainer" CdmEntityContainer="SparrowMusicEntities">
+    <EntitySetMapping Name="ARTIST_BLOG">
+      <EntityTypeMapping TypeName="SparrowMusicModel.ARTIST_BLOG">
+        <MappingFragment StoreEntitySet="ARTIST_BLOG">
+          <ScalarProperty Name="BLOG_ID" ColumnName="BLOG_ID" />
+          <ScalarProperty Name="BLOG" ColumnName="BLOG" />
+          <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_ALBUM">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_ALBUM">
+        <MappingFragment StoreEntitySet="SPRW_ALBUM">
+          <ScalarProperty Name="ALBUM_ID" ColumnName="ALBUM_ID" />
+          <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="DESCRP" ColumnName="DESCRP" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="RELEASE_DATE" ColumnName="RELEASE_DATE" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_ALBUM_IMG">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_ALBUM_IMG">
+        <MappingFragment StoreEntitySet="SPRW_ALBUM_IMG">
+          <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
+          <ScalarProperty Name="ALBUM_ID" ColumnName="ALBUM_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="DESCRP" ColumnName="DESCRP" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_ARTIST">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_ARTIST">
+        <MappingFragment StoreEntitySet="SPRW_ARTIST">
+          <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="DESCRP" ColumnName="DESCRP" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_ARTIST_EVENT">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_ARTIST_EVENT">
+        <MappingFragment StoreEntitySet="SPRW_ARTIST_EVENT">
+          <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+          <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="DESCRP" ColumnName="DESCRP" />
+          <ScalarProperty Name="EVENT_DATE" ColumnName="EVENT_DATE" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+          <ScalarProperty Name="STATE_ABBR" ColumnName="STATE_ABBR" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_ARTIST_IMG">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_ARTIST_IMG">
+        <MappingFragment StoreEntitySet="SPRW_ARTIST_IMG">
+          <ScalarProperty Name="IMG_ID" ColumnName="IMG_ID" />
+          <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="DESCRP" ColumnName="DESCRP" />
+          <ScalarProperty Name="IMG_PRIMARY" ColumnName="IMG_PRIMARY" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_GENRE">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_GENRE">
+        <MappingFragment StoreEntitySet="SPRW_GENRE">
+          <ScalarProperty Name="GENRE_ID" ColumnName="GENRE_ID" />
+          <ScalarProperty Name="GENRE" ColumnName="GENRE" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_POP_ARTIST">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_POP_ARTIST">
+        <MappingFragment StoreEntitySet="SPRW_POP_ARTIST">
+          <ScalarProperty Name="POP_ARTIST_ID" ColumnName="POP_ARTIST_ID" />
+          <ScalarProperty Name="POP_ARTIST_NAME" ColumnName="POP_ARTIST_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_ROLE">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_ROLE">
+        <MappingFragment StoreEntitySet="SPRW_ROLE">
+          <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+          <ScalarProperty Name="ROLE_NAME" ColumnName="ROLE_NAME" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_TRACK">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK">
+        <MappingFragment StoreEntitySet="SPRW_TRACK">
+          <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
+          <ScalarProperty Name="ALBUM_ID" ColumnName="ALBUM_ID" />
+          <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="DESCRP" ColumnName="DESCRP" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="RELEASE_DATE" ColumnName="RELEASE_DATE" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_USER">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_USER">
+        <MappingFragment StoreEntitySet="SPRW_USER">
+          <ScalarProperty Name="SALT" ColumnName="SALT" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+          <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="CC" ColumnName="CC" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_ARTIST_MEMBER">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_ARTIST_MEMBER">
+        <MappingFragment StoreEntitySet="SPRW_ARTIST_MEMBER">
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+          <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+          <ScalarProperty Name="ACT_IND" ColumnName="ACT_IND" />
+          <ScalarProperty Name="LAST_MAINT_USER_ID" ColumnName="LAST_MAINT_USER_ID" />
+          <ScalarProperty Name="LAST_MAINT_TIME" ColumnName="LAST_MAINT_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_TRACK_POPULAR_DISLIKES">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK_POPULAR_DISLIKES">
+        <MappingFragment StoreEntitySet="SPRW_TRACK_POPULAR_DISLIKES">
+          <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
+          <ScalarProperty Name="DISLIKE_DATE" ColumnName="DISLIKE_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_TRACK_POPULAR_LIKES">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK_POPULAR_LIKES">
+        <MappingFragment StoreEntitySet="SPRW_TRACK_POPULAR_LIKES">
+          <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
+          <ScalarProperty Name="LIKE_DATE" ColumnName="LIKE_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_TRACK_POPULAR_PLAY_THROUGH">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK_POPULAR_PLAY_THROUGH">
+        <MappingFragment StoreEntitySet="SPRW_TRACK_POPULAR_PLAY_THROUGH">
+          <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
+          <ScalarProperty Name="PLAY_DATE" ColumnName="PLAY_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_TRACK_POPULAR_PLAYS">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK_POPULAR_PLAYS">
+        <MappingFragment StoreEntitySet="SPRW_TRACK_POPULAR_PLAYS">
+          <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
+          <ScalarProperty Name="PLAY_DATE" ColumnName="PLAY_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_TRACK_POPULAR_SELECT">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK_POPULAR_SELECT">
+        <MappingFragment StoreEntitySet="SPRW_TRACK_POPULAR_SELECT">
+          <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
+          <ScalarProperty Name="SELECT_DATE" ColumnName="SELECT_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPRW_TRACK_POPULAR_SKIPS">
+      <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK_POPULAR_SKIPS">
+        <MappingFragment StoreEntitySet="SPRW_TRACK_POPULAR_SKIPS">
+          <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
+          <ScalarProperty Name="SKIP_DATE" ColumnName="SKIP_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SPRW_ARTIST_GENRE" TypeName="SparrowMusicModel.SPRW_ARTIST_GENRE" StoreEntitySet="SPRW_ARTIST_GENRE">
+      <EndProperty Name="SPRW_ARTIST">
+        <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+      </EndProperty>
+      <EndProperty Name="SPRW_GENRE">
+        <ScalarProperty Name="GENRE_ID" ColumnName="GENRE_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SPRW_ARTIST_POP_ARTIST" TypeName="SparrowMusicModel.SPRW_ARTIST_POP_ARTIST" StoreEntitySet="SPRW_ARTIST_POP_ARTIST">
+      <EndProperty Name="SPRW_ARTIST">
+        <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
+      </EndProperty>
+      <EndProperty Name="SPRW_POP_ARTIST">
+        <ScalarProperty Name="POP_ARTIST_ID" ColumnName="POP_ARTIST_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SPRW_POP_ARTIST_GENRE" TypeName="SparrowMusicModel.SPRW_POP_ARTIST_GENRE" StoreEntitySet="SPRW_POP_ARTIST_GENRE">
+      <EndProperty Name="SPRW_GENRE">
+        <ScalarProperty Name="GENRE_ID" ColumnName="GENRE_ID" />
+      </EndProperty>
+      <EndProperty Name="SPRW_POP_ARTIST">
+        <ScalarProperty Name="POP_ARTIST_ID" ColumnName="POP_ARTIST_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
