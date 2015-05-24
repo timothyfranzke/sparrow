@@ -44,6 +44,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -114,6 +118,7 @@
     <Content Include="App\Pages\Portal\PortalRouter.js" />
     <Content Include="App\Router.js" />
     <Content Include="App\Services\AuthService.js" />
+    <Content Include="artists\defualt.jpg" />
     <Content Include="Content\angular-material\angular-material.css" />
     <Content Include="Content\angular-material\angular-material.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -939,9 +944,11 @@
     <Compile Include="BLL\IAlbum.cs" />
     <Compile Include="BLL\IArtist.cs" />
     <Compile Include="BLL\IAuth.cs" />
+    <Compile Include="BLL\IDiscover.cs" />
     <Compile Include="BLL\Impl\Album.cs" />
     <Compile Include="BLL\Impl\Artist.cs" />
     <Compile Include="BLL\Impl\Auth.cs" />
+    <Compile Include="BLL\Impl\Discover.cs" />
     <Compile Include="BLL\Impl\Search.cs" />
     <Compile Include="BLL\Impl\Track.cs" />
     <Compile Include="BLL\Impl\User.cs" />
@@ -950,6 +957,8 @@
     <Compile Include="BLL\IUser.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\ArtistController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DiscoverController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SparrowController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
@@ -962,24 +971,36 @@
     <Compile Include="Models\AuthModels\UserTokenModel.cs" />
     <Compile Include="Models\CreateModels\CreateAlbumImageModel.cs" />
     <Compile Include="Models\CreateModels\CreateAlbumModel.cs" />
+    <Compile Include="Models\CreateModels\CreateArtistAssociation.cs" />
     <Compile Include="Models\CreateModels\CreateArtistImageModel.cs" />
     <Compile Include="Models\CreateModels\CreateArtistModel.cs" />
+    <Compile Include="Models\CreateModels\CreateEventModel.cs" />
     <Compile Include="Models\CreateModels\CreateImgModel.cs" />
     <Compile Include="Models\CreateModels\CreateTrackModel.cs" />
+    <Compile Include="Models\CreateModels\CreateTrackPopularModel.cs" />
     <Compile Include="Models\CreateModels\CreateUserModel.cs" />
+    <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\StatusModel.cs" />
     <Compile Include="Models\TrackModel.cs" />
+    <Compile Include="Models\TrackPathModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ViewModels\AlbumViewModel.cs" />
     <Compile Include="Models\ViewModels\ArtistListModel.cs" />
     <Compile Include="Models\ViewModels\ArtistViewModel.cs" />
     <Compile Include="Models\ViewModels\AuthUserViewModel.cs" />
     <Compile Include="Models\ViewModels\CreateViewModel.cs" />
+    <Compile Include="Models\ViewModels\EventViewModel.cs" />
+    <Compile Include="Models\ViewModels\PlaylistViewModel.cs" />
+    <Compile Include="Models\ViewModels\SearchUserViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IAlbumRepository.cs" />
     <Compile Include="Repository\IArtistRepository.cs" />
+    <Compile Include="Repository\IDiscoverRepository.cs" />
     <Compile Include="Repository\Impl\AlbumRepository.cs" />
     <Compile Include="Repository\Impl\ArtistRepository.cs" />
+    <Compile Include="Repository\Impl\DiscoverRepository.cs" />
     <Compile Include="Repository\Impl\SearchRepository.cs" />
     <Compile Include="Repository\Impl\TrackRepository.cs" />
     <Compile Include="Repository\Impl\UserRepository.cs" />
@@ -1072,8 +1093,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Controllers\" />
+    <Folder Include="App\Pages\Portal\Pages\User\Controllers\" />
     <Folder Include="App_Data\" />
-    <Folder Include="artists\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Discover\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

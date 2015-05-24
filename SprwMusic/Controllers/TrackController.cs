@@ -12,7 +12,7 @@ using SprwMusic.Models.ViewModels;
 
 namespace SprwMusic.Controllers
 {
-    public class TrackController : Controller
+    public class TrackController : BaseController
     {
         private readonly ITrack _track;
         private readonly IAuth _auth;
@@ -35,23 +35,7 @@ namespace SprwMusic.Controllers
             if (Verify(model.Token, model.UserEmail, model.ArtistId))
             {
                 var messages = new List<string>();
-                CreateViewModel status = new CreateViewModel
-                {
-                    Status = new StatusModel
-                    {
-                        Success = true
-                    }
-                };
-                try
-                {
-                    status = _track.CreateSingleTrack(model);
-                }
-                catch (Exception e)
-                {
-                    status.Status.Success = false;
-                    messages.Add("Exception: " + e);
-                }
-                status.Status.Messages = messages;
+                var status = _track.CreateSingleTrack(model);
                 return JsonConvert.SerializeObject(status);
             }
             else
@@ -67,43 +51,49 @@ namespace SprwMusic.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult GetAudioFile(int artistId, int albumId, int trackId)
+        [HttpPost]
+        public string CreateImage(CreateImgModel model)
         {
-            var album = "";
-            var track = trackId.ToString() + ".mp3";
-            if (albumId == -1)
+            if (Verify(model.Token, model.UserEmail, model.ArtistId))
             {
-                album = "singles";
+                var success = _track.CreateTrackImg(model);
+                return "{success : " + success + " }";
             }
             else
             {
-                album = albumId.ToString();
+                return JsonConvert.SerializeObject(new StatusModel()
+                {
+                    Success = false,
+                    Messages = new List<string>()
+                    {
+                        "unauthenticated"
+                    }
+                });
             }
-            var dir = String.Format("/artists/{0}/albums/{1}/tracks/{2}/{3}", artistId.ToString(), album, trackId.ToString(), track);
-
-            var fileLocation = HttpContext.Server.MapPath(dir);
-            var bytes = new byte[0];
-
-            using (var fs = new FileStream(fileLocation, FileMode.Open, FileAccess.Read))
-            {
-                var br = new BinaryReader(fs);
-                long numBytes = new FileInfo(fileLocation).Length;
-                bytes = br.ReadBytes((int)numBytes);
-            }
-
-            return File(bytes, "audio/mpeg", track);
+            
         }
 
-        private bool Verify(string token, string email, int artistId)
+        [HttpPost]
+        public string TrackPopularity(CreateTrackPopularModel model)
         {
-            var success = _auth.VerifyToken(token, email);
-            if (success)
-            {
-                success = _auth.VerifyArtist(email, artistId);
-            }
-
-            return success;
+            var success = _track.ModifyTrackPopularity(model);
+            return "{success : " + success + " }";
         }
+
+        [HttpGet]
+        public ActionResult GetAudioFile(int artistId, int albumId, int trackId)
+        {
+            var bytes = _track.GetFile("image", artistId, albumId, trackId);
+
+            return File(bytes, "audio/mpeg", trackId.ToString());
+        }
+
+        public ActionResult GetImageFile(int artistId, int albumId, int trackId)
+        {
+            var bytes = _track.GetFile("image", artistId, albumId, trackId);
+
+            return File(bytes, "image/jpg", trackId.ToString());
+        }
+
     }
 }

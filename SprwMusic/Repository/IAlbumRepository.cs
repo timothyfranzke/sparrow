@@ -6,6 +6,7 @@ namespace SprwMusic.Repository
 {
     public interface IAlbumRepository
     {
+        int GetArtistId(int albumId);
         CreateViewModel CreateAlbum(CreateAlbumModel model);
         CreateViewModel CreateAlbumImage(CreateAlbumImageModel model);
         StatusModel DeleteAlbum(int id);

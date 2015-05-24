@@ -26,7 +26,7 @@ namespace SprwMusic.Repository.Impl
             };
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     context.SPRW_USER.Add(user);
                     context.SaveChanges();
@@ -55,7 +55,7 @@ namespace SprwMusic.Repository.Impl
             var user = new SPRW_USER();
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var selectedUser = context.SPRW_USER.FirstOrDefault(i => i.EMAIL.ToLower().Equals(userEmail.ToLower()));
                     if (selectedUser != null)

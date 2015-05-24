@@ -23,5 +23,12 @@ namespace SprwMusic.Controllers
              
             return JsonConvert.SerializeObject(results);
         }
+
+        public string UserSearch(string email)
+        {
+            var results = _search.SearchUsers(email);
+
+            return JsonConvert.SerializeObject(results);
+        }
     }
 }

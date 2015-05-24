@@ -24,6 +24,7 @@ namespace SprwMusic
             this.SPRW_TRACK = new HashSet<SPRW_TRACK>();
             this.SPRW_GENRE = new HashSet<SPRW_GENRE>();
             this.SPRW_POP_ARTIST = new HashSet<SPRW_POP_ARTIST>();
+            this.SPRW_USER = new HashSet<SPRW_USER>();
         }
     
         public int ARTIST_ID { get; set; }
@@ -41,5 +42,6 @@ namespace SprwMusic
         public virtual ICollection<SPRW_TRACK> SPRW_TRACK { get; set; }
         public virtual ICollection<SPRW_GENRE> SPRW_GENRE { get; set; }
         public virtual ICollection<SPRW_POP_ARTIST> SPRW_POP_ARTIST { get; set; }
+        public virtual ICollection<SPRW_USER> SPRW_USER { get; set; }
     }
 }

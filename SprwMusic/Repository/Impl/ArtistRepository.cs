@@ -22,7 +22,7 @@ namespace SprwMusic.Repository.Impl
             };
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var userId = GetUserId(model.UserEmail);
                     var artist = new SPRW_ARTIST()
@@ -50,17 +50,12 @@ namespace SprwMusic.Repository.Impl
             return status;
         }
 
-        public StatusModel CreateArtistAssociation(string email, int artistId)
+        public bool CreateArtistAssociation(string email, int artistId)
         {
-            var messages = new List<string>();
-            var status = new StatusModel()
-            {
-                Success = true,
-                Messages = new List<string>()
-            };
+            var success = true;
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var userId = GetUserId(email);
                     var artistMember = new SPRW_ARTIST_MEMBER
@@ -78,18 +73,84 @@ namespace SprwMusic.Repository.Impl
             }
             catch (Exception e)
             {
-                status.Success = false;
-                messages.Add("Exception: " + e);
+                success = false;
             }
 
-            status.Messages = messages;
+            return success;
+        }
+
+        public bool CreateArtistAssociation(int artistId, int userId)
+        {
+            var success = true;
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+                    var artistMember = new SPRW_ARTIST_MEMBER
+                    {
+                        ROLE_ID = 1,
+                        ACT_IND = true,
+                        ARTIST_ID = artistId,
+                        LAST_MAINT_TIME = DateTime.Now,
+                        LAST_MAINT_USER_ID = userId,
+                        USER_ID = userId
+                    };
+                    context.SPRW_ARTIST_MEMBER.Add(artistMember);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
+        public CreateViewModel CreateEvent(CreateEventModel model)
+        {
+            var status = new CreateViewModel()
+            {
+                Status = new StatusModel()
+                {
+                    Success = true
+                }
+            };
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+                    var eventModel = new SPRW_ARTIST_EVENT()
+                    {
+                        ACT_IND = true,
+                        ADDRESS = model.Address,
+                        ARTIST_ID = model.ArtistId,
+                        CITY = model.City,
+                        DESCRP = model.Description,
+                        EVENT_DATE = model.EventDate,
+                        LAST_MAINT_TIME = DateTime.Now,
+                        LAST_MAINT_USER_ID = model.UserEmail,
+                        NAME = model.Name,
+                        STATE_ABBR = model.State,
+                        URL = model.Url
+                    };
+                    context.SPRW_ARTIST_EVENT.Add(eventModel);
+                    context.SaveChanges();
+                    status.Id = eventModel.EVENT_ID;
+                }
+            }
+            catch (Exception e)
+            {
+                status.Status.Success = false;
+            }
+
             return status;
         }
 
         public ArtistViewModel GetArtistById(int artistId)
         {
             ArtistViewModel artistModel = new ArtistViewModel();
-            using (var context = new SparrowMusicEntities())
+            using (var context = new SparrowMusicEntities11())
             {
                 var artist = context.SPRW_ARTIST.FirstOrDefault(i => i.ARTIST_ID == artistId);
                 artistModel.Artist = new ArtistModel()
@@ -131,7 +192,7 @@ namespace SprwMusic.Repository.Impl
             var artistList = new List<ArtistListModel>();
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var artists = context.SPRW_ARTIST_MEMBER.Where(i => i.USER_ID == id).Select(i => i.SPRW_ARTIST).ToList();
                     
@@ -163,7 +224,7 @@ namespace SprwMusic.Repository.Impl
             var artists = new List<SPRW_ARTIST>();
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     artists = context.SPRW_ARTIST.Where(i => i.NAME.StartsWith(name)).ToList();
                 }
@@ -182,7 +243,7 @@ namespace SprwMusic.Repository.Impl
             var id = -1;
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var firstOrDefault = context.SPRW_USER.FirstOrDefault(i => i.EMAIL.ToLower().Equals(email.ToLower()));
                     if (firstOrDefault != null)

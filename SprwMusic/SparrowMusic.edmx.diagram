@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SparrowMusicModel.SPRW_USER" Width="1.5" PointX="5.75" PointY="31.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_DISLIKES" Width="1.5" PointX="7.5" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_LIKES" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_LIKES" Width="1.5" PointX="8.375" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_PLAY_THROUGH" Width="1.5" PointX="7.5" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_PLAYS" Width="1.5" PointX="7.5" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SparrowMusicModel.SPRW_TRACK_POPULAR_SELECT" Width="1.5" PointX="7.5" PointY="26.5" IsExpanded="true" />
@@ -42,6 +42,9 @@
         <AssociationConnector Association="SparrowMusicModel.SPRW_POP_ARTIST_GENRE" ManuallyRouted="false" />
         <AssociationConnector Association="SparrowMusicModel.SPRW_ARTIST_GENRE" ManuallyRouted="false" />
         <AssociationConnector Association="SparrowMusicModel.SPRW_ARTIST_POP_ARTIST" ManuallyRouted="false" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__USER___4AB81AF0" />
+        <AssociationConnector Association="SparrowMusicModel.FK__SPRW_TRAC__USER___48CFD27E" />
+        <AssociationConnector Association="SparrowMusicModel.SPRW_USER_ARTIST_FOLLOW" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

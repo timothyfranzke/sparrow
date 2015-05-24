@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SprwMusic.Models;
+using SprwMusic.Models.ViewModels;
 
 namespace SprwMusic.Repository
 {
@@ -9,5 +10,6 @@ namespace SprwMusic.Repository
         IEnumerable<ArtistModel> SearchArtists(string name);
         IEnumerable<AlbumModel> SearchAlbums(string name);
         IEnumerable<TrackModel> SearchTracks(string name);
+        SearchUserViewModel SearchUsers(string email);
     }
 }

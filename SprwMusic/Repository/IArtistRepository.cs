@@ -8,7 +8,9 @@ namespace SprwMusic.Repository
     public interface IArtistRepository
     {
         CreateViewModel CreateArtist(CreateArtistModel artist);
-        StatusModel CreateArtistAssociation(string email, int artistId);
+        CreateViewModel CreateEvent(CreateEventModel model);
+        bool CreateArtistAssociation(string email, int artistId);
+        bool CreateArtistAssociation(int artistId, int userId);
         IEnumerable<ArtistListModel> GetArtists(string email);
         ArtistViewModel GetArtistById(int artistId);
 

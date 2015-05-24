@@ -9,7 +9,7 @@ using SprwMusic.Models.ViewModels;
 
 namespace SprwMusic.Controllers
 {
-    public class AlbumController : Controller
+    public class AlbumController : BaseController
     {
         private readonly IAlbum _album;
         private readonly IAuth _auth;
@@ -43,7 +43,7 @@ namespace SprwMusic.Controllers
                         Success = false,
                         Messages = new List<string>
                         {
-                            "No access"
+                            "Unauthenticated"
                         }
                     }
                 };
@@ -55,19 +55,21 @@ namespace SprwMusic.Controllers
         [HttpPost]
         public string CreateImage( CreateImgModel model )
         {
-            
-            return "";
-        }
-
-        private bool Verify(string token, string email, int artistId)
-        {
-            var success = _auth.VerifyToken(token, email);
-            if (success)
+            var status = new StatusModel();
+            if (Verify(model.Token, model.UserEmail, model.ArtistId))
             {
-                success = _auth.VerifyArtist(email, artistId);
+                status.Success = _album.CreateAlbumImg(model);
             }
-            
-            return success;
+            else
+            {
+                status.Success = false;
+                status.Messages = new List<string>
+                {
+                    "Unauthenticated"
+                };
+            }
+
+            return JsonConvert.SerializeObject(status);
         }
    }
 }

@@ -36,18 +36,9 @@ namespace SprwMusic.BLL.Impl
             return status;
         }
 
-        public CreateViewModel CreateAlbumImage(CreateAlbumImageModel model)
+        public bool CreateAlbumImg(CreateImgModel model)
         {
-            var dbStat = _repository.CreateAlbumImage(model);
-            if (dbStat.Status.Success)
-            {
-                var fileStat = CreateAlbumImage(model, dbStat.Id);
-                if (!fileStat.Success)
-                {
-                    _repository.DeleteAlbumImage(dbStat.Id);
-                }
-            }
-            return new CreateViewModel();
+            return CreateAlbumImgDirectory(model);
         }
         
         private StatusModel CreateAlbumImage(CreateAlbumImageModel model, int imgId)
@@ -68,6 +59,11 @@ namespace SprwMusic.BLL.Impl
             }
 
             return status;
+        }
+
+        public byte[] GetFile(int? artistId, int? albumId)
+        {
+            return FileUtil.GetImgFile(artistId, albumId, null);
         }
 
         private StatusModel CreateAlbumDirectory(int artistId, int albumId)
@@ -92,6 +88,37 @@ namespace SprwMusic.BLL.Impl
             }
 
             return status;
+        }
+
+        private bool CreateAlbumImgDirectory(CreateImgModel model)
+        {
+            var success = true;
+            var artistId = _repository.GetArtistId(model.TrackingId);
+            var albums = String.Empty;
+            if (model.TrackingId < 0)
+            {
+                albums = "/albums/singles";
+            }
+            else
+            {
+                albums = "/albums/" + model.TrackingId;
+            }
+            var dir = "/artists/" + artistId + albums + "/img/";
+
+            var status = new StatusModel
+            {
+                Messages = new List<string>()
+            };
+            try
+            {
+                success = FileUtil.CreateImgFile(dir, model.AlbumImage, model.TrackingId);
+            }
+            catch (Exception e)
+            {
+                success = false;
+            }
+
+            return success;
         }
     }
 }

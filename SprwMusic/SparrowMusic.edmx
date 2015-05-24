@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SparrowMusicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SparrowMusicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ARTIST_BLOG">
           <Key>
             <PropertyRef Name="BLOG_ID" />
@@ -162,25 +162,23 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_ARTIST_POP_ARTIST' does not
           <Property Name="LAST_MAINT_USER_ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="LAST_MAINT_TIME" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_DISLIKES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SPRW_TRACK_POPULAR_DISLIKES">
           <Key>
-            <PropertyRef Name="TRACK_ID" />
-            <PropertyRef Name="DISLIKE_DATE" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="TRACK_ID" Type="int" Nullable="false" />
           <Property Name="DISLIKE_DATE" Type="datetime" Nullable="false" />
+          <Property Name="USER_ID" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_LIKES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SPRW_TRACK_POPULAR_LIKES">
           <Key>
-            <PropertyRef Name="TRACK_ID" />
-            <PropertyRef Name="LIKE_DATE" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="TRACK_ID" Type="int" Nullable="false" />
           <Property Name="LIKE_DATE" Type="datetime" Nullable="false" />
+          <Property Name="USER_ID" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_PLAY_THROUGH' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -236,6 +234,14 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <Property Name="LAST_MAINT_USER_ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="LAST_MAINT_TIME" Type="datetime" Nullable="false" />
           <Property Name="SALT" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SPRW_USER_ARTIST_FOLLOW">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="ARTIST_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="ARTIST_ID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__ARTIST_BL__ARTIS__398D8EEE">
           <End Role="SPRW_ARTIST" Type="Self.SPRW_ARTIST" Multiplicity="1" />
@@ -501,6 +507,54 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__SPRW_TRAC__USER___48CFD27E">
+          <End Role="SPRW_USER" Type="Self.SPRW_USER" Multiplicity="0..1" />
+          <End Role="SPRW_TRACK_POPULAR_LIKES" Type="Self.SPRW_TRACK_POPULAR_LIKES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPRW_USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="SPRW_TRACK_POPULAR_LIKES">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SPRW_TRAC__USER___4AB81AF0">
+          <End Role="SPRW_USER" Type="Self.SPRW_USER" Multiplicity="0..1" />
+          <End Role="SPRW_TRACK_POPULAR_DISLIKES" Type="Self.SPRW_TRACK_POPULAR_DISLIKES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPRW_USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="SPRW_TRACK_POPULAR_DISLIKES">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SPRW_USER__ARTIS__52593CB8">
+          <End Role="SPRW_ARTIST" Type="Self.SPRW_ARTIST" Multiplicity="1" />
+          <End Role="SPRW_USER_ARTIST_FOLLOW" Type="Self.SPRW_USER_ARTIST_FOLLOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPRW_ARTIST">
+              <PropertyRef Name="ARTIST_ID" />
+            </Principal>
+            <Dependent Role="SPRW_USER_ARTIST_FOLLOW">
+              <PropertyRef Name="ARTIST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SPRW_USER__USER___5165187F">
+          <End Role="SPRW_USER" Type="Self.SPRW_USER" Multiplicity="1" />
+          <End Role="SPRW_USER_ARTIST_FOLLOW" Type="Self.SPRW_USER_ARTIST_FOLLOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPRW_USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="SPRW_USER_ARTIST_FOLLOW">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SparrowMusicModelStoreContainer">
           <EntitySet Name="ARTIST_BLOG" EntityType="Self.ARTIST_BLOG" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_ALBUM" EntityType="Self.SPRW_ALBUM" Schema="SPRW" store:Type="Tables" />
@@ -514,7 +568,10 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <EntitySet Name="SPRW_POP_ARTIST_GENRE" EntityType="Self.SPRW_POP_ARTIST_GENRE" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_ROLE" EntityType="Self.SPRW_ROLE" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_TRACK" EntityType="Self.SPRW_TRACK" Schema="SPRW" store:Type="Tables" />
+          <EntitySet Name="SPRW_TRACK_POPULAR_DISLIKES" EntityType="Self.SPRW_TRACK_POPULAR_DISLIKES" Schema="SPRW" store:Type="Tables" />
+          <EntitySet Name="SPRW_TRACK_POPULAR_LIKES" EntityType="Self.SPRW_TRACK_POPULAR_LIKES" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_USER" EntityType="Self.SPRW_USER" Schema="SPRW" store:Type="Tables" />
+          <EntitySet Name="SPRW_USER_ARTIST_FOLLOW" EntityType="Self.SPRW_USER_ARTIST_FOLLOW" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_ARTIST_GENRE" EntityType="Self.SPRW_ARTIST_GENRE" store:Type="Tables" store:Schema="SPRW">
             <DefiningQuery>SELECT 
     [SPRW_ARTIST_GENRE].[ARTIST_ID] AS [ARTIST_ID], 
@@ -526,18 +583,6 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
     [SPRW_ARTIST_POP_ARTIST].[ARTIST_ID] AS [ARTIST_ID], 
     [SPRW_ARTIST_POP_ARTIST].[POP_ARTIST_ID] AS [POP_ARTIST_ID]
     FROM [SPRW].[SPRW_ARTIST_POP_ARTIST] AS [SPRW_ARTIST_POP_ARTIST]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="SPRW_TRACK_POPULAR_DISLIKES" EntityType="Self.SPRW_TRACK_POPULAR_DISLIKES" store:Type="Tables" store:Schema="SPRW">
-            <DefiningQuery>SELECT 
-    [SPRW_TRACK_POPULAR_DISLIKES].[TRACK_ID] AS [TRACK_ID], 
-    [SPRW_TRACK_POPULAR_DISLIKES].[DISLIKE_DATE] AS [DISLIKE_DATE]
-    FROM [SPRW].[SPRW_TRACK_POPULAR_DISLIKES] AS [SPRW_TRACK_POPULAR_DISLIKES]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="SPRW_TRACK_POPULAR_LIKES" EntityType="Self.SPRW_TRACK_POPULAR_LIKES" store:Type="Tables" store:Schema="SPRW">
-            <DefiningQuery>SELECT 
-    [SPRW_TRACK_POPULAR_LIKES].[TRACK_ID] AS [TRACK_ID], 
-    [SPRW_TRACK_POPULAR_LIKES].[LIKE_DATE] AS [LIKE_DATE]
-    FROM [SPRW].[SPRW_TRACK_POPULAR_LIKES] AS [SPRW_TRACK_POPULAR_LIKES]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SPRW_TRACK_POPULAR_PLAY_THROUGH" EntityType="Self.SPRW_TRACK_POPULAR_PLAY_THROUGH" store:Type="Tables" store:Schema="SPRW">
             <DefiningQuery>SELECT 
@@ -651,9 +696,24 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
             <End Role="SPRW_TRACK" EntitySet="SPRW_TRACK" />
             <End Role="SPRW_TRACK_POPULAR_SKIPS" EntitySet="SPRW_TRACK_POPULAR_SKIPS" />
           </AssociationSet>
+          <AssociationSet Name="FK__SPRW_TRAC__USER___48CFD27E" Association="Self.FK__SPRW_TRAC__USER___48CFD27E">
+            <End Role="SPRW_USER" EntitySet="SPRW_USER" />
+            <End Role="SPRW_TRACK_POPULAR_LIKES" EntitySet="SPRW_TRACK_POPULAR_LIKES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SPRW_TRAC__USER___4AB81AF0" Association="Self.FK__SPRW_TRAC__USER___4AB81AF0">
+            <End Role="SPRW_USER" EntitySet="SPRW_USER" />
+            <End Role="SPRW_TRACK_POPULAR_DISLIKES" EntitySet="SPRW_TRACK_POPULAR_DISLIKES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SPRW_USER__ARTIS__52593CB8" Association="Self.FK__SPRW_USER__ARTIS__52593CB8">
+            <End Role="SPRW_ARTIST" EntitySet="SPRW_ARTIST" />
+            <End Role="SPRW_USER_ARTIST_FOLLOW" EntitySet="SPRW_USER_ARTIST_FOLLOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SPRW_USER__USER___5165187F" Association="Self.FK__SPRW_USER__USER___5165187F">
+            <End Role="SPRW_USER" EntitySet="SPRW_USER" />
+            <End Role="SPRW_USER_ARTIST_FOLLOW" EntitySet="SPRW_USER_ARTIST_FOLLOW" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SparrowMusicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -716,6 +776,7 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <NavigationProperty Name="SPRW_TRACK" Relationship="Self.FK__SPRW_TRAC__ARTIS__164452B1" FromRole="SPRW_ARTIST" ToRole="SPRW_TRACK" />
           <NavigationProperty Name="SPRW_GENRE" Relationship="Self.SPRW_ARTIST_GENRE" FromRole="SPRW_ARTIST" ToRole="SPRW_GENRE" />
           <NavigationProperty Name="SPRW_POP_ARTIST" Relationship="Self.SPRW_ARTIST_POP_ARTIST" FromRole="SPRW_ARTIST" ToRole="SPRW_POP_ARTIST" />
+          <NavigationProperty Name="SPRW_USER" Relationship="SparrowMusicModel.SPRW_USER_ARTIST_FOLLOW" FromRole="SPRW_ARTIST" ToRole="SPRW_USER" />
         </EntityType>
         <EntityType Name="SPRW_ARTIST_EVENT">
           <Key>
@@ -832,24 +893,31 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <Property Name="LAST_MAINT_TIME" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SALT" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SPRW_ARTIST_MEMBER" Relationship="Self.FK__SPRW_ARTI__USER___31EC6D26" FromRole="SPRW_USER" ToRole="SPRW_ARTIST_MEMBER" />
+          <NavigationProperty Name="SPRW_TRACK_POPULAR_DISLIKES" Relationship="SparrowMusicModel.FK__SPRW_TRAC__USER___4AB81AF0" FromRole="SPRW_USER" ToRole="SPRW_TRACK_POPULAR_DISLIKES" />
+          <NavigationProperty Name="SPRW_TRACK_POPULAR_LIKES" Relationship="SparrowMusicModel.FK__SPRW_TRAC__USER___48CFD27E" FromRole="SPRW_USER" ToRole="SPRW_TRACK_POPULAR_LIKES" />
+          <NavigationProperty Name="SPRW_ARTIST" Relationship="SparrowMusicModel.SPRW_USER_ARTIST_FOLLOW" FromRole="SPRW_USER" ToRole="SPRW_ARTIST" />
         </EntityType>
         <EntityType Name="SPRW_TRACK_POPULAR_DISLIKES">
           <Key>
-            <PropertyRef Name="TRACK_ID" />
-            <PropertyRef Name="DISLIKE_DATE" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="TRACK_ID" Type="Int32" Nullable="false" />
           <Property Name="DISLIKE_DATE" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SPRW_TRACK" Relationship="Self.FK__SPRW_TRAC__DISLI__1BFD2C07" FromRole="SPRW_TRACK_POPULAR_DISLIKES" ToRole="SPRW_TRACK" />
+          <Property Name="USER_ID" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SPRW_USER" Relationship="SparrowMusicModel.FK__SPRW_TRAC__USER___4AB81AF0" FromRole="SPRW_TRACK_POPULAR_DISLIKES" ToRole="SPRW_USER" />
         </EntityType>
         <EntityType Name="SPRW_TRACK_POPULAR_LIKES">
           <Key>
-            <PropertyRef Name="TRACK_ID" />
-            <PropertyRef Name="LIKE_DATE" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="TRACK_ID" Type="Int32" Nullable="false" />
           <Property Name="LIKE_DATE" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SPRW_TRACK" Relationship="Self.FK__SPRW_TRAC__LIKE___21B6055D" FromRole="SPRW_TRACK_POPULAR_LIKES" ToRole="SPRW_TRACK" />
+          <Property Name="USER_ID" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SPRW_USER" Relationship="SparrowMusicModel.FK__SPRW_TRAC__USER___48CFD27E" FromRole="SPRW_TRACK_POPULAR_LIKES" ToRole="SPRW_USER" />
         </EntityType>
         <EntityType Name="SPRW_TRACK_POPULAR_PLAY_THROUGH">
           <Key>
@@ -1091,7 +1159,7 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <End Role="SPRW_ARTIST" Type="Self.SPRW_ARTIST" Multiplicity="*" />
           <End Role="SPRW_POP_ARTIST" Type="Self.SPRW_POP_ARTIST" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="SparrowMusicEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SparrowMusicEntities11" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ARTIST_BLOG" EntityType="Self.ARTIST_BLOG" />
           <EntitySet Name="SPRW_ALBUM" EntityType="Self.SPRW_ALBUM" />
           <EntitySet Name="SPRW_ALBUM_IMG" EntityType="Self.SPRW_ALBUM_IMG" />
@@ -1186,13 +1254,53 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
             <End Role="SPRW_ARTIST" EntitySet="SPRW_ARTIST" />
             <End Role="SPRW_POP_ARTIST" EntitySet="SPRW_POP_ARTIST" />
           </AssociationSet>
+          <AssociationSet Name="FK__SPRW_TRAC__USER___4AB81AF0" Association="SparrowMusicModel.FK__SPRW_TRAC__USER___4AB81AF0">
+            <End Role="SPRW_USER" EntitySet="SPRW_USER" />
+            <End Role="SPRW_TRACK_POPULAR_DISLIKES" EntitySet="SPRW_TRACK_POPULAR_DISLIKES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SPRW_TRAC__USER___48CFD27E" Association="SparrowMusicModel.FK__SPRW_TRAC__USER___48CFD27E">
+            <End Role="SPRW_USER" EntitySet="SPRW_USER" />
+            <End Role="SPRW_TRACK_POPULAR_LIKES" EntitySet="SPRW_TRACK_POPULAR_LIKES" />
+          </AssociationSet>
+          <AssociationSet Name="SPRW_USER_ARTIST_FOLLOW" Association="SparrowMusicModel.SPRW_USER_ARTIST_FOLLOW">
+            <End Role="SPRW_ARTIST" EntitySet="SPRW_ARTIST" />
+            <End Role="SPRW_USER" EntitySet="SPRW_USER" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__SPRW_TRAC__USER___4AB81AF0">
+          <End Type="SparrowMusicModel.SPRW_USER" Role="SPRW_USER" Multiplicity="0..1" />
+          <End Type="SparrowMusicModel.SPRW_TRACK_POPULAR_DISLIKES" Role="SPRW_TRACK_POPULAR_DISLIKES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPRW_USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="SPRW_TRACK_POPULAR_DISLIKES">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SPRW_TRAC__USER___48CFD27E">
+          <End Type="SparrowMusicModel.SPRW_USER" Role="SPRW_USER" Multiplicity="0..1" />
+          <End Type="SparrowMusicModel.SPRW_TRACK_POPULAR_LIKES" Role="SPRW_TRACK_POPULAR_LIKES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPRW_USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="SPRW_TRACK_POPULAR_LIKES">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SPRW_USER_ARTIST_FOLLOW">
+          <End Type="SparrowMusicModel.SPRW_ARTIST" Role="SPRW_ARTIST" Multiplicity="*" />
+          <End Type="SparrowMusicModel.SPRW_USER" Role="SPRW_USER" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SparrowMusicModelStoreContainer" CdmEntityContainer="SparrowMusicEntities1">
+        <EntityContainerMapping StorageEntityContainer="SparrowMusicModelStoreContainer" CdmEntityContainer="SparrowMusicEntities11">
           <EntitySetMapping Name="ARTIST_BLOG">
             <EntityTypeMapping TypeName="SparrowMusicModel.ARTIST_BLOG">
               <MappingFragment StoreEntitySet="ARTIST_BLOG">
@@ -1350,6 +1458,8 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <EntitySetMapping Name="SPRW_TRACK_POPULAR_DISLIKES">
             <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK_POPULAR_DISLIKES">
               <MappingFragment StoreEntitySet="SPRW_TRACK_POPULAR_DISLIKES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
                 <ScalarProperty Name="DISLIKE_DATE" ColumnName="DISLIKE_DATE" />
               </MappingFragment>
@@ -1358,6 +1468,8 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <EntitySetMapping Name="SPRW_TRACK_POPULAR_LIKES">
             <EntityTypeMapping TypeName="SparrowMusicModel.SPRW_TRACK_POPULAR_LIKES">
               <MappingFragment StoreEntitySet="SPRW_TRACK_POPULAR_LIKES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="TRACK_ID" ColumnName="TRACK_ID" />
                 <ScalarProperty Name="LIKE_DATE" ColumnName="LIKE_DATE" />
               </MappingFragment>
@@ -1417,6 +1529,14 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
             </EndProperty>
             <EndProperty Name="SPRW_POP_ARTIST">
               <ScalarProperty Name="POP_ARTIST_ID" ColumnName="POP_ARTIST_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SPRW_USER_ARTIST_FOLLOW" TypeName="SparrowMusicModel.SPRW_USER_ARTIST_FOLLOW" StoreEntitySet="SPRW_USER_ARTIST_FOLLOW">
+            <EndProperty Name="SPRW_USER">
+              <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+            </EndProperty>
+            <EndProperty Name="SPRW_ARTIST">
+              <ScalarProperty Name="ARTIST_ID" ColumnName="ARTIST_ID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

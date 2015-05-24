@@ -17,6 +17,9 @@ namespace SprwMusic
         public SPRW_USER()
         {
             this.SPRW_ARTIST_MEMBER = new HashSet<SPRW_ARTIST_MEMBER>();
+            this.SPRW_TRACK_POPULAR_DISLIKES = new HashSet<SPRW_TRACK_POPULAR_DISLIKES>();
+            this.SPRW_TRACK_POPULAR_LIKES = new HashSet<SPRW_TRACK_POPULAR_LIKES>();
+            this.SPRW_ARTIST = new HashSet<SPRW_ARTIST>();
         }
     
         public int USER_ID { get; set; }
@@ -31,5 +34,8 @@ namespace SprwMusic
         public int SALT { get; set; }
     
         public virtual ICollection<SPRW_ARTIST_MEMBER> SPRW_ARTIST_MEMBER { get; set; }
+        public virtual ICollection<SPRW_TRACK_POPULAR_DISLIKES> SPRW_TRACK_POPULAR_DISLIKES { get; set; }
+        public virtual ICollection<SPRW_TRACK_POPULAR_LIKES> SPRW_TRACK_POPULAR_LIKES { get; set; }
+        public virtual ICollection<SPRW_ARTIST> SPRW_ARTIST { get; set; }
     }
 }

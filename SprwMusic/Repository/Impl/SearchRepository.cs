@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SprwMusic.Models;
+using SprwMusic.Models.ViewModels;
 
 namespace SprwMusic.Repository.Impl
 {
@@ -12,7 +13,7 @@ namespace SprwMusic.Repository.Impl
             var artists = new List<ArtistModel>();
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var artistList = context.SPRW_ARTIST.Where(i => i.NAME.StartsWith(name)).Take(3);
                     foreach(var artist in artistList)
@@ -39,7 +40,7 @@ namespace SprwMusic.Repository.Impl
             var albums = new List<AlbumModel>();
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var albumList = context.SPRW_ALBUM.Where(i => i.NAME.StartsWith(name)).Take(3);
                     foreach (var album in albumList)
@@ -73,7 +74,7 @@ namespace SprwMusic.Repository.Impl
             var tracks = new List<TrackModel>();
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var trackList = context.SPRW_TRACK.Where(i => i.NAME.StartsWith(name)).Take(3);
                     foreach (var track in trackList)
@@ -105,6 +106,35 @@ namespace SprwMusic.Repository.Impl
             }
 
             return tracks;
+        }
+
+        public SearchUserViewModel SearchUsers(string email)
+        {
+            var searchUserModel = new SearchUserViewModel();
+            var userList = new List<UserModel>();
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+                    var users = context.SPRW_USER.Where(i => i.EMAIL.Contains(email));
+                    foreach (var user in users)
+                    {
+                        var model = new UserModel()
+                        {
+                            UserEmail = user.EMAIL,
+                            UserId = user.USER_ID
+                        };
+                        userList.Add(model);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
+            
+            searchUserModel.Users = userList;
+            return searchUserModel;
         }
     }
 }

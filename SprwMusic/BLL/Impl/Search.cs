@@ -42,5 +42,10 @@ namespace SprwMusic.BLL.Impl
             searchViewModel.Status.Messages = messages;
             return searchViewModel;
         }
+
+        public SearchUserViewModel SearchUsers(string email)
+        {
+           return _repository.SearchUsers(email);
+        }
     }
 }

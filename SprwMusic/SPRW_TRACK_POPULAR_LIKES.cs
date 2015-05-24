@@ -16,7 +16,10 @@ namespace SprwMusic
     {
         public int TRACK_ID { get; set; }
         public System.DateTime LIKE_DATE { get; set; }
+        public Nullable<int> USER_ID { get; set; }
+        public int ID { get; set; }
     
         public virtual SPRW_TRACK SPRW_TRACK { get; set; }
+        public virtual SPRW_USER SPRW_USER { get; set; }
     }
 }

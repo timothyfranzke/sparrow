@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web.Mvc;
 using Sparrow_Music.Models.ViewModels;
 using Newtonsoft.Json;
@@ -70,6 +71,33 @@ namespace SprwMusic.Controllers
             }
 
             return JsonConvert.SerializeObject(authModel);
+        }
+
+        public ActionResult GetImageFile(int artistId, int albumId, int trackId)
+        {
+            var album = "";
+            var track = trackId.ToString() + ".jpg";
+            if (albumId == -1)
+            {
+                album = "singles";
+            }
+            else
+            {
+                album = albumId.ToString();
+            }
+            var dir = String.Format("/artists/{0}/albums/{1}/tracks/{2}/img/{3}", artistId.ToString(), album, trackId.ToString(), track);
+
+            var fileLocation = HttpContext.Server.MapPath(dir);
+            var bytes = new byte[0];
+
+            using (var fs = new FileStream(fileLocation, FileMode.Open, FileAccess.Read))
+            {
+                var br = new BinaryReader(fs);
+                long numBytes = new FileInfo(fileLocation).Length;
+                bytes = br.ReadBytes((int)numBytes);
+            }
+
+            return File(bytes, "image/jpg", track);
         }
     }
 }

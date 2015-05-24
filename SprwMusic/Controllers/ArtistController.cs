@@ -11,9 +11,9 @@ using SprwMusic.Models.ViewModels;
 
 namespace SprwMusic.Controllers
 {
-    public class ArtistController : Controller
+    public class ArtistController : BaseController
     {
-        private readonly Artist _artist;
+        private readonly IArtist _artist;
         private readonly IAuth _auth;
         public ArtistController()
         {
@@ -98,10 +98,64 @@ namespace SprwMusic.Controllers
 
         //POST: Artist/CreateImage
         [HttpPost]
-        public String CreateImage(CreateArtistImageModel model)
+        public String CreateImage(CreateImgModel model)
         {
-            var image = model.Image;
-            return "";
+            if (Verify(model.Token, model.UserEmail, model.ArtistId))
+            {
+                var success = _artist.CreateartistImg(model);
+                return "{success : " + success + " }";
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new StatusModel()
+                {
+                    Success = false,
+                    Messages = new List<string>()
+                    {
+                        "unauthenticated"
+                    }
+                });
+            }
+        }
+
+        public string CreateAssociation(CreateArtistAssociation model)
+        {
+            if (Verify(model.Token, model.UserEmail, model.ArtistId))
+            {
+                var success = _artist.CreateAssociation(model);
+                return "{success : " + success + " }";
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new StatusModel()
+                {
+                    Success = false,
+                    Messages = new List<string>()
+                    {
+                        "unauthenticated"
+                    }
+                });
+            }
+        }
+
+        public string CreateEvent(CreateEventModel model)
+        {
+            if (Verify(model.Token, model.UserEmail, model.ArtistId))
+            {
+                var success = _artist.CreateEvent(model);
+                return "{success : " + success + " }";
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new StatusModel()
+                {
+                    Success = false,
+                    Messages = new List<string>()
+                    {
+                        "unauthenticated"
+                    }
+                });
+            }
         }
     }
 }

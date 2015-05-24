@@ -27,7 +27,7 @@ namespace SprwMusic.Repository.Impl
             };
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var album = new SPRW_ALBUM()
                     {
@@ -66,7 +66,7 @@ namespace SprwMusic.Repository.Impl
             };
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var albumImage = new SPRW_ALBUM_IMG
                     {
@@ -91,6 +91,23 @@ namespace SprwMusic.Repository.Impl
             return status;
         }
 
+        public int GetArtistId(int albumId)
+        {
+            int artistId = -1;
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+                    artistId = context.SPRW_ALBUM.FirstOrDefault(i => i.ALBUM_ID == albumId).ARTIST_ID;
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
+            return artistId;
+        }
+
         public StatusModel DeleteAlbum(int id)
         {
             var messages = new List<string>();
@@ -101,7 +118,7 @@ namespace SprwMusic.Repository.Impl
 
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var album = context.SPRW_ALBUM.FirstOrDefault(i => i.ALBUM_ID == id);
                     context.SPRW_ALBUM.Remove(album);
@@ -127,7 +144,7 @@ namespace SprwMusic.Repository.Impl
             };
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var album = context.SPRW_ALBUM_IMG.FirstOrDefault(i => i.IMG_ID == id);
                     context.SPRW_ALBUM_IMG.Remove(album);

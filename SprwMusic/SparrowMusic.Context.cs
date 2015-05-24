@@ -13,10 +13,10 @@ namespace SprwMusic
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SparrowMusicEntities : DbContext
+    public partial class SparrowMusicEntities11 : DbContext
     {
-        public SparrowMusicEntities()
-            : base("name=SparrowMusicEntities")
+        public SparrowMusicEntities11()
+            : base("name=SparrowMusicEntities11")
         {
         }
     

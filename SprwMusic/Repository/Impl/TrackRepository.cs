@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Services;
 using SprwMusic.Models;
 using SprwMusic.Models.CreateModels;
 using SprwMusic.Models.ViewModels;
@@ -10,6 +11,9 @@ namespace SprwMusic.Repository.Impl
 {
     public class TrackRepository: ITrackRepository
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger
+        (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public CreateViewModel CreateTrack(CreateTrackModel model)
         {
             var messages = new List<string>();
@@ -32,7 +36,8 @@ namespace SprwMusic.Repository.Impl
             }
             try
             {
-                using (var context = new SparrowMusicEntities())
+                log.Info("method : CreateTrack | action : starting db connections");
+                using (var context = new SparrowMusicEntities11())
                 {
                     var album = new SPRW_TRACK()
                     {
@@ -55,10 +60,8 @@ namespace SprwMusic.Repository.Impl
             catch (Exception e)
             {
                 status.Status.Success = false;
-                messages.Add("Exception: " + e);
+                log.Error("method : CreateTrack | exception : " + e.Message);
             }
-
-            status.Status.Messages = messages;
             return status;
         }
 
@@ -71,7 +74,7 @@ namespace SprwMusic.Repository.Impl
             };
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
                     var track = context.SPRW_TRACK.FirstOrDefault(i => i.TRACK_ID == id);
                     context.SPRW_TRACK.Remove(track);
@@ -88,26 +91,101 @@ namespace SprwMusic.Repository.Impl
             return status;
         }
 
-        public void PopularPlayThrough(int id)
+        public TrackPathModel GetTrackPath(int trackId)
         {
-            
+            var model = new TrackPathModel();
             try
             {
-                using (var context = new SparrowMusicEntities())
+                using (var context = new SparrowMusicEntities11())
                 {
-                    var model = new SPRW_TRACK_POPULAR_PLAY_THROUGH
-                    {
-                        PLAY_DATE = DateTime.Now,
-                        TRACK_ID = id
-                    };
-                    context.SPRW_TRACK_POPULAR_PLAY_THROUGH.Add(model);
-                    context.SaveChanges();
+                    var track = context.SPRW_TRACK.FirstOrDefault(i => i.TRACK_ID == trackId);
+                    model.AlbumId = track.ALBUM_ID;
+                    model.ArtistId = track.ARTIST_ID;
+                    model.TrackId = trackId;
                 }
             }
             catch (Exception e)
             {
                 
             }
+
+            return model;
+        }
+        public bool AddTrackPopularityLike(CreateTrackPopularModel model)
+        {
+            var success = true;
+            try
+            {
+                log.Info("method : AddTrackPopularityLike | action : starting db connection | message : liking track " + model.TrackId);
+                using (var context = new SparrowMusicEntities11())
+                {
+
+                    var like = new SPRW_TRACK_POPULAR_LIKES()
+                    {
+                        LIKE_DATE = DateTime.Now,
+                        TRACK_ID = model.TrackId,
+                        USER_ID = model.UserId
+                    };
+                    context.SPRW_TRACK_POPULAR_LIKES.Add(like);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                log.Error("method : AddTrackPopularityLike | exception : " + e.Message);
+            }
+            return success;
+        }
+
+        public bool AddTrackPopularityDislike(CreateTrackPopularModel model)
+        {
+            var success = true;
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+
+                    var dislike = new SPRW_TRACK_POPULAR_DISLIKES()
+                    {
+                        DISLIKE_DATE = DateTime.Now,
+                        TRACK_ID = model.TrackId,
+                        USER_ID = model.UserId
+                    };
+                    context.SPRW_TRACK_POPULAR_DISLIKES.Add(dislike);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                log.Error("method : AddTrackPopularityDislike | exception : " + e.Message);
+            }
+            return success;
+        }
+
+        public bool AddTrackPopularityPlayThrough(CreateTrackPopularModel model)
+        {
+            var success = true;
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+                    var playThrough = new SPRW_TRACK_POPULAR_PLAY_THROUGH
+                    {
+                        PLAY_DATE = DateTime.Now,
+                        TRACK_ID = model.TrackId
+                    };
+                    context.SPRW_TRACK_POPULAR_PLAY_THROUGH.Add(playThrough);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                log.Error("method : AddTrackPopularityPlayThrough | exception : " + e.Message);
+            }
+            return success;
         }
     }
 }
