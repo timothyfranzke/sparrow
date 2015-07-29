@@ -1,0 +1,30 @@
+﻿
+<md-dialog aria-label="Create An Artist">
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>Select an Image</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="answer('not applicable')">
+            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<div class="create-image">
+    <img class="create-img" alt="artist" />
+    <span><span class="glyphicon glyphicon-plus"></span><span>Upload Image</span></span>
+    <input type="text" ng-model="track.TrackName" placeholder="Title" />
+    <input type="date" ng-model="track.ReleaseDate" placeholder="Release Date" />
+    <input type="file" nv-file-select name="Track" ng-click="init()" uploader="uploader" /><br />
+    <input type="submit" ng-click="uploadTrack(track)" value="Upload" />
+    <p ng-show="imageCropResult">Wanna start over? &rarr; <a ng-click="imageCropResult=null;imageCropStep=1">Reset</a></p>
+    <image-crop data-width="300"
+                data-height="300"
+                data-shape="rectangle"
+                data-step="imageCropStep"
+                data-result="imageCropResult"
+                ng-show="showImageCropper"></image-crop>
+    <hr />
+
+
+</div>
+    </md-dialog>

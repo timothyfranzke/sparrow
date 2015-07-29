@@ -1,6 +1,43 @@
-﻿body {
+﻿@charset "UTF-8";
+/* CSS Document */
+
+body{width:100%; margin:0 auto; padding:0 auto; font-family:arial; background:url(http://franzkedesign.com/sparrow/i/fabric.jpg) repeat #DFDFDF;}
+
+.clear{clear:both;}
+
+#artist-header{width: 100%; margin:0 auto; background:url(http://franzkedesign.com/sparrow/i/header-bg.jpg) no-repeat top left #ae2a02; background-size:100% auto; position:fixed; top:0; left:0; z-index:200; border-botom:1px solid #a33412;}
+
+.settings{background:url(http://franzkedesign.com/sparrow/i/gear.png) no-repeat center center #7c1c00; float:right; width:50px; height:50px; border-left:1px solid #a02907; margin-left:20px;}
+
+.artist-logo{padding-left:40px; padding-top:7px; float:left;}
+.artist-nav{padding:4px 0; margin-left:20px; float:left; padding-top:16px;}
+.artist-back{margin-right:5px;}
+.artist-forward{margin-left:5px;}
+
+.searchBar{float:left; padding-top:7px;}
+#search{width:215px; border:1px solid #ba4425; height:30px; color:#252525; background:url(http://franzkedesign.com/sparrow/i/search.png) no-repeat #FFFFFF; background-position:5px center; padding-left:30px; margin-left:20px;}
+
+.userInfo{float:right; color:#FFF; padding-top:17px; font-size:14px;}
+.profilePhoto{float:left; margin-right:8px; margin-top:-13px; width:38px; height:38px; border:1px solid #a6371b; overflow:hidden; text-align:center;}
+
+#menuBar{background:#581400; position:fixed; top:0; left:0; z-index:100; height:100%; width:290px;}
+#menuBar ul{list-style-type:none; padding:0; margin:51px 0 0;}
+#menuBar ul li{display:block;}
+#menuBar ul li a{display:block; padding:15px 10%; width:80%; color:#FFF; text-decoration:none; border-bottom:1px solid #611e0a; font-size:16px;}
+.activeNav{background:#821b00;}
+
+#controlBar{width:100%; position:fixed; bottom:0; left:0; background:#e7e7e7; border:1px solid #d2d2d2; z-index:300; height:85px;}
+.trackNav{float:left; padding:10px 56px; border-right:1px solid #d2d2d2;}
+#prev, #next{width:45px; height:45px; background-repeat:no-repeat; background-position:center center; display: inline-block; border:2px solid #b32a00; border-radius:100%; margin:0 2px;}
+#prev{background-image:url(http://franzkedesign.com/sparrow/i/prev.png);}
+#next{background-image:url(http://franzkedesign.com/sparrow/i/next.png);}
+#play{width:57px; height:57px; background-repeat:no-repeat; background-position:center center; display: inline-block; background-image:url(../i/play.png); border:2px solid #b32a00;border-radius:100%; margin-bottom:-5px;}
+.fabToolbardemoBasicUsage md-fab-toolbar.md-left md-fab-trigger.align-with-text { left: 7px; }
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #eeeeee;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -16,3 +53,121 @@ textarea {
     max-width: 280px;
 }
 
+.logo-large-holder {
+    background-color: #ce3706;
+    width: 100%;
+    text-align: center;
+    height: 40%;
+}
+
+.logo-large {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.form-containter {
+    width: 50px;
+}
+.center {
+    text-align: center;
+    width: 100%;
+    background-color: white;
+}
+.sprw-btn {
+    width: 300px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ce3706;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+.form-input {
+    width: 300px;
+    background-color: white;
+}
+
+.grey-background {
+    background-color: #eeeeee;
+}
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+    height: 50px;
+   width:100%;
+   background:#ce3706;
+    color: white;
+    font-size:xx-large
+}
+
+#header {
+    position:fixed;
+}
+
+.chipsdemoBasicUsage .custom-chips .md-chip {
+  position: relative;
+  padding-right: 35px; }
+  .chipsdemoBasicUsage .custom-chips .md-chip .md-chip-remove-container {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    margin-right: 0;
+    height: 24px; }
+    .chipsdemoBasicUsage .custom-chips .md-chip .md-chip-remove-container button.vegetablechip {
+      position: relative;
+      height: 24px;
+      width: 24px;
+      line-height: 30px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      transition: background 0.15s linear;
+      display: block; }
+      .chipsdemoBasicUsage .custom-chips .md-chip .md-chip-remove-container button.vegetablechip md-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0) scale(0.7);
+        color: white;
+        fill: white; }
+      .chipsdemoBasicUsage .custom-chips .md-chip .md-chip-remove-container button.vegetablechip:hover, .chipsdemoBasicUsage .custom-chips .md-chip .md-chip-remove-container button.vegetablechip:focus {
+        background: rgba(255, 0, 0, 0.8); }
+
+      .fabSpeedDialdemoBasicUsage .text-capitalize {
+  text-transform: capitalize; }
+.fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {
+  background-color: #000 !important; }
+.fabSpeedDialdemoBasicUsage p.note {
+  font-size: 1.2rem; }
+.fabSpeedDialdemoBasicUsage .lock-size {
+  min-width: 300px;
+  min-height: 300px;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto; }

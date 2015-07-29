@@ -22,20 +22,47 @@ namespace SprwMusic.Repository.Impl
             {
                 using (var context = new SparrowMusicEntities11())
                 {
-                    var tracks = context.SPRW_TRACK.OrderBy(i => i.SPRW_TRACK_POPULAR_LIKES.Count);
+                    var tracks =
+                        context.SPRW_TRACK.OrderByDescending(i => i.SPRW_TRACK_POPULAR_LIKES.Count).ThenBy(i => i.LAST_MAINT_TIME).Take(100);
                     foreach (var track in tracks)
                     {
-                        var model = new PlaylistModel();
-                        model.AlbumId = track.ALBUM_ID;
-                        model.AlbumName = track.SPRW_ALBUM != null ? track.SPRW_ALBUM.NAME : null;
-                        model.ArtistId = track.ARTIST_ID;
-                        model.ArtistName = track.SPRW_ARTIST.NAME;
-                        model.TrackId = track.TRACK_ID;
-                        model.PopCount = track.SPRW_TRACK_POPULAR_LIKES.Count(i => i.LIKE_DATE > DateTime.Now.AddMonths(-6)) -
-                                         track.SPRW_TRACK_POPULAR_DISLIKES.Count(i => i.DISLIKE_DATE > DateTime.Now.AddMonths(-6));
-                        //model.PrimGenre = track.SPRW_ARTIST.SPRW_GENRE != null ? track.SPRW_ARTIST.SPRW_GENRE.GENRE : null;
-
-                        playlist.Add(model);
+                        if (playlist.Exists(i=>i.ArtistName == track.SPRW_ARTIST.NAME))
+                        {
+                            var playlistItem = new PlaylistTrack
+                            {
+                                AlbumId = track.ALBUM_ID,
+                                AlbumName = track.SPRW_ALBUM != null ? track.SPRW_ALBUM.NAME : null,
+                                TrackId = track.TRACK_ID,
+                                PopCount =
+                                    track.SPRW_TRACK_POPULAR_LIKES.Count(i => i.LIKE_DATE > DateTime.Now.AddMonths(-6)) -
+                                    track.SPRW_TRACK_POPULAR_DISLIKES.Count(
+                                        i => i.DISLIKE_DATE > DateTime.Now.AddMonths(-6))
+                            };
+                            var firstOrDefault = playlist.FirstOrDefault(i=>i.ArtistName == track.SPRW_ARTIST.NAME);
+                            if (firstOrDefault != null)
+                                firstOrDefault.Tracks.Add(playlistItem);
+                        }
+                        else
+                        {
+                            playlist.Add(new PlaylistModel
+                            {
+                                ArtistId = track.ARTIST_ID,
+                                ArtistName = track.SPRW_ARTIST.NAME,
+                                Tracks = new List<PlaylistTrack>
+                                {
+                                    new PlaylistTrack
+                                    {
+                                        AlbumId = track.ALBUM_ID,
+                                        AlbumName = track.SPRW_ALBUM != null ? track.SPRW_ALBUM.NAME : null,
+                                        TrackId = track.TRACK_ID,
+                                        PopCount =
+                                            track.SPRW_TRACK_POPULAR_LIKES.Count(i => i.LIKE_DATE > DateTime.Now.AddMonths(-6)) -
+                                            track.SPRW_TRACK_POPULAR_DISLIKES.Count(
+                                                i => i.DISLIKE_DATE > DateTime.Now.AddMonths(-6))
+                                    }}
+                                });
+                                
+                        }
                     }
                 }
             }
@@ -51,6 +78,10 @@ namespace SprwMusic.Repository.Impl
             };
         }
 
+        public EventViewModel GetEvents(string email)
+        {
+            return new EventViewModel();
+        }
 
         private static int GetUserId(string email)
         {

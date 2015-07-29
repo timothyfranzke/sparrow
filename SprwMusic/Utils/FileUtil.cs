@@ -78,6 +78,29 @@ namespace SprwMusic.Utils
             return success;
         }
 
+        public static bool CreateImgFile(string filePath, string base64File, int fileNum)
+        {
+            var success = false;
+            try
+            {
+                var bytes = Convert.FromBase64String(base64File);
+                using (
+               FileStream fs =
+                   System.IO.File.Create(HttpContext.Current.Server.MapPath(filePath + fileNum + ".jpg")))
+                {
+                    fs.Write(bytes, 0, bytes.Length);
+                    }
+
+                success = true;
+            }
+            catch
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
         public static bool CreateDirectory(string dirPath)
         {
             bool success = false;
@@ -102,7 +125,7 @@ namespace SprwMusic.Utils
         {
             var album = "";
             var track = trackId.ToString() + ".mp3";
-            if (albumId == -1)
+            if (albumId == null)
             {
                 album = "singles";
             }

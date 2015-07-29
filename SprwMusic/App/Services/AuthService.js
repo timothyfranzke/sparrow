@@ -1,4 +1,4 @@
-﻿sparrowApp.factory('AuthService', function ($http, $q) {
+﻿sparrowApp.factory('Auth', function ($http, $q) {
     var user = {
         email: "",
         token: "",
@@ -16,7 +16,7 @@
                 }
             };
             $http(req)
-                .success(function (data) {
+                .success(function(data) {
                     user.authenticated = data.Authenticated;
                     user.token = data.Token;
                     user.email = userData.Email;
@@ -40,7 +40,7 @@
                 }
             };
             $http(req)
-                .success(function (data) {
+                .success(function(data) {
                     user.authenticated = data.Authenticated;
                     user.token = data.Token;
                     user.email = userData.email;
@@ -51,9 +51,12 @@
                 });
             return defer.promise;
         },
-
-        GetUserInfo : function() {
+        GetUserInfo: function() {
             return user;
+        },
+        SetUserInfo: function(userInfo) {
+            user.email = userInfo.Email;
+            user.token = userInfo.Token;
         }
-    }
+    };
 });

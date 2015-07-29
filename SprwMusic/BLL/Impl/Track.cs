@@ -94,7 +94,7 @@ namespace SprwMusic.BLL.Impl
         private StatusModel CreateTrackDirectory(CreateTrackModel model, int trackId)
         {
             var albums = String.Empty;
-            if (model.AlbumId < 0)
+            if (model.AlbumId == null)
             {
                 albums = "/albums/singles";
             }

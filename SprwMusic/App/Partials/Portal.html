@@ -1,0 +1,58 @@
+﻿<div id="portal-header">
+
+    <div class="settings">
+    </div>
+
+    <div class="userInfo">
+        <div class="profilePhoto">
+            <img src="i/grant.jpg" alt="Alan Grant" />
+        </div>
+
+        Dr. Alan Grant
+    </div>
+
+    <div class="headerLeft">
+
+        <div class="logo">
+            <img src="i/logo.png" alt="Sparrow" />
+        </div>
+
+        <div class="nav">
+            <img src="i/back.png" alt="Back" class="back" />  <img src="i/forward.png" alt="Forward" class="forward" />
+        </div>
+
+        <div class="searchBar">
+            <input type="text" name="search" id="search" value="Search">
+        </div>
+
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+<div id="menuBar">
+    <ul>
+        <li><a href="discover">Discover</a></li>
+        <li><a href="#">My Music</a></li>
+        <li><a href="#" ng-click="showArtist($event)">+ Create Artist</a></li>
+    </ul>
+</div>
+
+<div id="controlBar">
+    <div class="trackNav">
+        <div id="play">
+        </div>
+        <div id="next">
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+<div id="bodyWrap">
+    <div class="bodyHolder">
+        <div class="content">
+            <ui-view></ui-view>
+        </div>
+    </div>
+</div>

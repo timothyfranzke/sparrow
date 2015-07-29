@@ -1,1 +1,0 @@
-﻿sparrowApp.controller('PortalController', function($scope, AuthService) {});

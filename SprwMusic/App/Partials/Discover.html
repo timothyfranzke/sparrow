@@ -1,0 +1,12 @@
+﻿
+    <md-grid-list md-cols-sm="3" md-cols-md="6" md-cols-gt-md="6"
+                  md-row-height-gt-md="1:1" md-row-height="2:2"
+                  md-gutter="12px" md-gutter-gt-sm="8px">
+        <md-grid-tile class="gray"
+                      md-rowspan="1" md-colspan="1" md-colspan-sm="1" ng-repeat="item in playlist" ng-style="{'background-image': url('/>Track/GetImageFile?artistId={{item.ArtistId}}&albumId=0&trackId=0')}">
+            <!--img src="/Track/GetImageFile?artistId={{item.ArtistId}}&albumId=0&trackId=0" width="100" height="100" ng-click="player.play(item)" /-->
+            <md-grid-tile-footer>
+                <h3>{{item.ArtistName}}</h3>
+            </md-grid-tile-footer>
+        </md-grid-tile>
+        </md-grid-list>

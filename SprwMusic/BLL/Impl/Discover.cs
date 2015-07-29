@@ -19,5 +19,10 @@ namespace SprwMusic.BLL.Impl
         {
             return _repository.GetPlaylist(page);
         }
+
+        public EventViewModel GetEvents(string email)
+        {
+            return _repository.GetEvents(email);
+        }
     }
 }

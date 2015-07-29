@@ -1,0 +1,44 @@
+﻿<md-dialog style="height: 600px; width:600px;">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create Album</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="/i/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-input-container>
+            <label>Album Name</label>
+            <input ng-model="album.AlbumName" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Artist Description</label>
+            <input ng-model="album.Description" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Release Date</label>
+            <input ng-model="album.ReleaseDate" type="date">
+        </md-input-container>
+        <div layout="row">
+            <div class="create-image">
+                <p ng-show="imageCropResult">Wanna start over? &rarr; <a ng-click="imageCropResult=null;imageCropStep=1">Reset</a></p>
+                <image-crop data-width="300"
+                            data-height="300"
+                            data-shape="rectangle"
+                            data-step="imageCropStep"
+                            data-result="albumImage"
+                            ng-show="showImageCropper">
+                </image-crop>
+                <img data-ng-src="{{albumImage}}" ng-hide="showImageCropper" />
+                <hr />
+            </div>
+        </div>
+    </md-dialog-content>
+    <div layout="row">
+        <md-button ng-click="create(album)" class="md-primary">
+            Create
+        </md-button>
+    </div>
+</md-dialog>

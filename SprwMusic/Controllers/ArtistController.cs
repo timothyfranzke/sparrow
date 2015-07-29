@@ -55,6 +55,42 @@ namespace SprwMusic.Controllers
             
         }
 
+        public string GetGenres()
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(_artist.GetGenres());
+            }
+            catch (Exception)
+            {
+                return "error";
+            }
+        }
+        //POST: Artist/CreateImage
+        [HttpPost]
+        public string AddGenre(int artistId, int genreId)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(_artist.AddGenre(artistId, genreId));
+            }
+            catch (Exception)
+            {
+                return "error";
+            }
+        }
+        [HttpPost]
+        public string RemoveGenre(int artistId, int genreId)
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(_artist.RemoveGenre(artistId, genreId));
+            }
+            catch (Exception)
+            {
+                return "error";
+            }
+        }
         // POST: Artist/CreateArtist
         [HttpPost]
         public string CreateArtist(CreateArtistModel model)
@@ -98,12 +134,14 @@ namespace SprwMusic.Controllers
 
         //POST: Artist/CreateImage
         [HttpPost]
-        public String CreateImage(CreateImgModel model)
+        public String CreateImage(CreateImgBase64Model model)
         {
+            model.Image64 = model.Image64.Substring(model.Image64.IndexOf(",") + 1);
+            var bytes = Convert.FromBase64String(model.Image64);
             if (Verify(model.Token, model.UserEmail, model.ArtistId))
             {
                 var success = _artist.CreateartistImg(model);
-                return "{success : " + success + " }";
+                //return "{success : " + success + " }";
             }
             else
             {
@@ -116,6 +154,7 @@ namespace SprwMusic.Controllers
                     }
                 });
             }
+            return "";
         }
 
         public string CreateAssociation(CreateArtistAssociation model)

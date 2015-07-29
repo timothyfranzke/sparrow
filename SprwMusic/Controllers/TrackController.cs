@@ -81,9 +81,9 @@ namespace SprwMusic.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAudioFile(int artistId, int albumId, int trackId)
+        public ActionResult GetAudioFile(int artistId, int? albumId, int trackId)
         {
-            var bytes = _track.GetFile("image", artistId, albumId, trackId);
+            var bytes = _track.GetFile("audio", artistId, albumId, trackId);
 
             return File(bytes, "audio/mpeg", trackId.ToString());
         }
@@ -92,7 +92,7 @@ namespace SprwMusic.Controllers
         {
             var bytes = _track.GetFile("image", artistId, albumId, trackId);
 
-            return File(bytes, "image/jpg", trackId.ToString());
+            return File(bytes, "image/jpg", trackId + ".jpg");
         }
 
     }

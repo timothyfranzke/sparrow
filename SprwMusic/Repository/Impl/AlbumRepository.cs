@@ -15,6 +15,44 @@ namespace SprwMusic.Repository.Impl
         {
 
         }
+
+        public AlbumViewModel GetAlbum(int artistId)
+        {
+            var model = new AlbumViewModel();
+            model.Albums = new List<AlbumModel>();
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+                    var albums = context.SPRW_ALBUM.Where(i => i.SPRW_ARTIST.ARTIST_ID == artistId);
+                    foreach (var album in albums)
+                    {
+                        var albumModel = new AlbumModel
+                        {
+                            AlbumId = album.ALBUM_ID,
+                            AlbumName = album.NAME,
+                            Tracks = new List<TrackModel>()
+                        };
+                        foreach (var track in album.SPRW_TRACK)
+                        {
+                            var trackModel = new TrackModel
+                            {
+                                TrackId = track.TRACK_ID,
+                                TrackName = track.NAME
+                            };
+                            albumModel.Tracks.Add(trackModel);
+                        }
+                        model.Albums.Add(albumModel);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
+            return model;
+        }
+
         public CreateViewModel CreateAlbum(CreateAlbumModel model)
         {
             var messages = new List<string>();

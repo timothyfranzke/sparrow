@@ -8,5 +8,6 @@ namespace SprwMusic.BLL
         CreateViewModel CreateAlbum(CreateAlbumModel model);
         bool CreateAlbumImg(CreateImgModel model);
         byte[] GetFile(int? artistId, int? albumId);
+        AlbumViewModel GetAlbums(int artistId);
     }
 }

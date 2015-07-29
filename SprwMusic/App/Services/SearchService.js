@@ -1,10 +1,12 @@
-﻿sparrowApp.factory("HomeService", function($http, $q) {
+﻿sparrowApp.factory('Search', function($http, $q) {
     return {
-        Login : function(userData) {
+        UserSearch: function (email) {
             var defer = $q.defer();
-            $http.get("Sparrow/AuthenticateUser", {
-                    data: userData
-                })
+            var req = {
+                url: "Search/UserSearch?email=" + email,
+                method: "GET"
+            };
+            $http(req)
                 .success(function(data) {
                     defer.resolve(data);
                 })
@@ -13,12 +15,13 @@
                 });
             return defer.promise();
         },
-
-        CreateUser : function(userData) {
+        MultiSearch: function (name) {
             var defer = $q.defer();
-            $http.get("Sparrow/CreateUser", {
-                data: userData
-            })
+            var req = {
+                url: "Search/MultiSearch?name=" + name,
+                method: "GET"
+            };
+            $http(req)
                 .success(function (data) {
                     defer.resolve(data);
                 })
@@ -27,5 +30,5 @@
                 });
             return defer.promise();
         }
-    }
+    };
 });

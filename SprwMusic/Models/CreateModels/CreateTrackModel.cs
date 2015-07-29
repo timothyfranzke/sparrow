@@ -9,7 +9,7 @@ namespace SprwMusic.Models.CreateModels
     {
         public string UserEmail { get; set; }
         public string Token { get; set; }
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
         public int ArtistId { get; set; }
         public HttpPostedFileBase Track { get; set; }
         public string TrackName { get; set; }

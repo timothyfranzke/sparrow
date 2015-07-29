@@ -9,5 +9,7 @@ namespace SprwMusic.Models.ViewModels
     {
         public int ArtistId { get; set; }
         public string ArtistName { get; set; }
+        public List<AlbumModel> Albums { get; set; }
+        public List<EventModel> Events { get; set; } 
     }
 }

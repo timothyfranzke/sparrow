@@ -4,9 +4,9 @@
         Password: ""
     };
 
-    $scope.login = function (user) {
+    $scope.login = function(user) {
         console.log(JSON.stringify(user));
-        AuthService.Login(user).then(function (data) {
+        AuthService.Login(user).then(function(data) {
             console.log(JSON.stringify(data));
             if (data.authenticated) {
                 alert("you're in");
@@ -16,8 +16,6 @@
                 alert("you are out");
             }
         });
-    }
-
-
+    };
 });
 

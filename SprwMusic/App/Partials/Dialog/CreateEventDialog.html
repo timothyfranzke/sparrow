@@ -1,0 +1,46 @@
+﻿<md-dialog style="height: 600px; width:600px;">
+    <<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>Create Event</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="/i/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+    <md-dialog-content>
+        <md-input-container>
+            <label>Event Name</label>
+            <input ng-model="event.Name" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Event Description</label>
+            <input ng-model="event.Description" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Event Date</label>
+            <input ng-model="event.EventDate" type="date">
+        </md-input-container>
+        <md-input-container>
+            <label>Event Address</label>
+            <input ng-model="event.Address" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Event City</label>
+            <input ng-model="event.City" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Event State</label>
+            <input ng-model="event.State" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Event URL</label>
+            <input ng-model="event.Url" type="text">
+        </md-input-container>
+    </md-dialog-content>
+    <div layout="row">
+        <md-button ng-click="create(event)" class="md-primary">
+            Create
+        </md-button>
+    </div>
+</md-dialog>

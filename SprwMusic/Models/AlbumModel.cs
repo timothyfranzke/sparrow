@@ -9,6 +9,6 @@ namespace SprwMusic.Models
     {
         public int AlbumId { get; set; }
         public string AlbumName { get; set; }
-        public IEnumerable<TrackModel> Tracks { get; set; } 
+        public List<TrackModel> Tracks { get; set; } 
     }
 }

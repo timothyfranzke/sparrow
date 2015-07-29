@@ -1,0 +1,34 @@
+﻿<md-dialog style="height: 600px; width:600px;">
+    <md-toolbar>
+        <h2>Create Artist</h2>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-input-container>
+            <label>ArtistName</label>
+            <input ng-model="artist.Name" type="text">
+        </md-input-container>
+        <md-input-container>
+            <label>Artist Description</label>
+            <input ng-model="artist.Description" type="text">
+        </md-input-container>
+        <div layout="row">
+            <div class="create-image">
+                <p ng-show="imageCropResult">Wanna start over? &rarr; <a ng-click="imageCropResult=null;imageCropStep=1">Reset</a></p>
+                <image-crop data-width="300"
+                            data-height="300"
+                            data-shape="rectangle"
+                            data-step="imageCropStep"
+                            data-result="artistImage"
+                            ng-show="showImageCropper">
+                </image-crop>
+                <img data-ng-src="{{artistImage}}" ng-hide="showImageCropper" />
+                <hr />
+            </div>
+        </div>
+    </md-dialog-content>
+    <div layout="row">
+        <md-button ng-click="createArtist(artist)" class="md-primary">
+            Create
+        </md-button>
+    </div>
+</md-dialog>

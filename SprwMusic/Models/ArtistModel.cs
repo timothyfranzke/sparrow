@@ -10,7 +10,8 @@ namespace SprwMusic.Models
         public int ArtistId { get; set; }
         public string AristName { get; set; }
         public string Description { get; set; }
-        public IEnumerable<AlbumModel> Albums { get; set; }
+        public List<AlbumModel> Albums { get; set; }
+        public List<EventModel> Events { get; set; } 
 
     }
 }

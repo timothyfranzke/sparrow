@@ -1,0 +1,18 @@
+﻿<div id="image-crop-{{ rand }}" class="ng-image-crop ng-image-crop--{{ shape }}" ng-style="moduleStyles">
+    <section ng-style="sectionStyles" ng-show="step==1">
+        <md-button class="md-primary md-raised">
+            <label for="file-input">Select Image</label>
+        </md-button>
+        <input id="file-input" type="file" class="image-crop-input">
+    </section>
+    <section ng-style="sectionStyles" ng-show="step==2">
+                  <canvas class="cropping-canvas" width="{{ canvasWidth }}" height="{{ canvasHeight }}" ng-mousemove="onCanvasMouseMove($event)" ng-mousedown="onCanvasMouseDown($event)" ng-mouseup="onCanvasMouseUp($event)"></canvas>
+        <div class="zoom-handle" ng-mousemove="onHandleMouseMove($event)" ng-mousedown="onHandleMouseDown($event)" ng-mouseup="onHandleMouseUp($event)">
+            <span>&larr; zoom &rarr;</span>
+        </div>
+        <md-button class="md-primary md-raised" ng-click="crop()">Accept Image</md-button>
+    </section>
+    <section ng-style="sectionStyles" class="image-crop-section-final" ng-show="step==3">
+        <img class="image-crop-final" ng-src="{{ croppedDataUri }}" />
+    </section>
+</div>'

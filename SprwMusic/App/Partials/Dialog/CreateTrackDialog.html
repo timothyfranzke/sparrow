@@ -1,0 +1,31 @@
+﻿<md-dialog style="height: 600px; width:600px;">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create Track</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="/i/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-input-container>
+            <label>Track Title</label>
+            <input type="text" ng-model="track.TrackName"/>
+        </md-input-container>
+        <label>Album</label>
+        <md-input-container>
+            <md-select ng-model="track.AlbumId" ng-change="selectAlbum(album)" aria-label="genre">
+                <md-option ng-repeat="album in artist.Albums" value="{{album.AlbumId}}">{{album.AlbumName}}</md-option>
+            </md-select>
+        </md-input-container>
+        <div layout="row">
+            <input type="file" nv-file-select name="Track" ng-click="init()" uploader="uploader"/><br />
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="uploadTrack(track)" class="md-primary">
+            Add Track
+        </md-button>
+    </div>
+</md-dialog>

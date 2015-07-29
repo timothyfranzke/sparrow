@@ -1,0 +1,43 @@
+﻿<md-toolbar layout="row" flex="33" layout-align="space-around left" class="md-medium-tall md-accent">
+    <img class="logo-large" src="/Content/Images/logo-wo-words.png" height="95%" />
+    <div flex="33" layout-align="space-around left">
+        <h1 class="md-display-3 text-white logo">sparrow</h1>
+
+    </div>
+</md-toolbar>
+<div layout="column" layout-align="center center" md-theme="docs-dark" style="background-image: url(Create.html)">
+    <md-content layout="column" layout-padding layout-align="center center">
+        <md-input-container>
+            <label>First Name</label>
+            <input name="firstName" ng-model="register.FirstName">
+        </md-input-container>
+        <md-input-container class="form-input">
+            <label>Last Name</label>
+            <input name="lastName" ng-model="register.LastName">
+        </md-input-container>
+        <md-input-container class="form-input">
+            <label>Email</label>
+            <input name="email" ng-model="register.Email">
+        </md-input-container>
+        <md-input-container class="form-input">
+            <label>Confirm Email</label>
+            <input name="confirmEmail" ng-model="confirm.Email">
+        </md-input-container>
+        <md-input-container class="form-input">
+            <label>Password</label>
+            <input name="password" ng-model="register.Password" type="password">
+        </md-input-container>
+        <md-input-container class="form-input">
+            <label>Confirm Password</label>
+            <input name="confirmPassword" ng-model="confirm.Password" type="password">
+        </md-input-container>
+        <md-checkbox ng-model="register.remember" aria-label="Checkbox 1">
+            Remember Me
+        </md-checkbox>
+        <md-button md-theme="default"  class="md-accent md-raised md-hue-1" ng-click="createUser(register, confirm)">Create</md-button>
+        
+    </md-content>
+</div>
+<div class="overlay" ng-show="showSpinner">
+    <md-progress-circular class="loader md-accent" md-mode="indeterminate"></md-progress-circular>
+</div>

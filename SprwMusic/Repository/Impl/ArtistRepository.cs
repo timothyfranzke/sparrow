@@ -182,6 +182,21 @@ namespace SprwMusic.Repository.Impl
                     albums.Add(albumModel);
                 }
                 artistModel.Artist.Albums = albums;
+
+                var events = new List<EventModel>();
+                foreach (var e in artist.SPRW_ARTIST_EVENT)
+                {
+                    var model = new EventModel
+                    {
+                        Address = e.ADDRESS,
+                        City = e.CITY,
+                        State = e.STATE_ABBR,
+                        Description = e.DESCRP,
+                        EventDate = e.EVENT_DATE
+                    };
+                    events.Add(model);
+                }
+                artistModel.Artist.Events = events;
             }
             return artistModel;
         }
@@ -214,6 +229,24 @@ namespace SprwMusic.Repository.Impl
             return artistList;
         }
 
+        public GenreViewModel GetGenres()
+        {
+            var model = new GenreViewModel {Genres = new List<GenreModel>()};
+            using (var context = new SparrowMusicEntities11())
+            {
+                var genres = context.SPRW_GENRE;
+                foreach (var genre in genres)
+                {
+                    model.Genres.Add(new GenreModel
+                    {
+                        Genre = genre.GENRE,
+                        GenreId = genre.GENRE_ID
+                    });
+                }
+            }
+            return model;
+        }
+
         public IEnumerable<SPRW_ARTIST> GetArtistsByName(string name)
         {
             var messages = new List<string>();
@@ -238,7 +271,55 @@ namespace SprwMusic.Repository.Impl
 
             return artists;
         }
-        private static int GetUserId(string email)
+
+        public StatusModel AddGenre(int artistId, int genreId)
+        {
+            var status = new StatusModel
+            {
+                Success = true
+            };
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+                    var genre = context.SPRW_GENRE.FirstOrDefault(i => i.GENRE_ID == genreId);
+                    var artist = context.SPRW_ARTIST.FirstOrDefault(i=>i.ARTIST_ID == artistId);
+                    if (artist != null)
+                        artist.SPRW_GENRE.Add(genre);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                status.Success = false;
+            }
+            return status;
+        }
+
+        public StatusModel RemoveGenre(int artistId, int genreId)
+        {
+            var status = new StatusModel
+            {
+                Success = true
+            };
+            try
+            {
+                using (var context = new SparrowMusicEntities11())
+                {
+                    var genre = context.SPRW_GENRE.FirstOrDefault(i => i.GENRE_ID == genreId);
+                    var artist = context.SPRW_ARTIST.FirstOrDefault(i => i.ARTIST_ID == artistId);
+                    if (artist != null)
+                        artist.SPRW_GENRE.Remove(genre);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                status.Success = false;
+            }
+            return status;
+        }
+        private int GetUserId(string email)
         {
             var id = -1;
             try
@@ -257,6 +338,7 @@ namespace SprwMusic.Repository.Impl
 
             return id;
         }
+
     }
 
     

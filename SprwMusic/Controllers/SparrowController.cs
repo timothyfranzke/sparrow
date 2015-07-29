@@ -73,10 +73,10 @@ namespace SprwMusic.Controllers
             return JsonConvert.SerializeObject(authModel);
         }
 
-        public ActionResult GetImageFile(int artistId, int albumId, int trackId)
+        public ActionResult GetImageFile(int artistId, int? albumId, int? trackId)
         {
             var album = "";
-            var track = trackId.ToString() + ".jpg";
+            var track = trackId + ".jpg";
             if (albumId == -1)
             {
                 album = "singles";
@@ -85,7 +85,7 @@ namespace SprwMusic.Controllers
             {
                 album = albumId.ToString();
             }
-            var dir = String.Format("/artists/{0}/albums/{1}/tracks/{2}/img/{3}", artistId.ToString(), album, trackId.ToString(), track);
+            var dir = String.Format("/artists/{0}/albums/{1}/tracks/{2}/img/{3}", artistId, album, trackId, track);
 
             var fileLocation = HttpContext.Server.MapPath(dir);
             var bytes = new byte[0];
@@ -99,5 +99,6 @@ namespace SprwMusic.Controllers
 
             return File(bytes, "image/jpg", track);
         }
+
     }
 }

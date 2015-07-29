@@ -8,6 +8,7 @@ namespace SprwMusic.Models.ViewModels
     public class AlbumViewModel
     {
         public StatusModel Status { get; set; }
-        public IEnumerable<SPRW_ALBUM> Albums { get; set; } 
+        public List<AlbumModel> Albums { get; set; } 
+        public IEnumerable<SPRW_ALBUM> Albums_dep { get; set; } 
     }
 }

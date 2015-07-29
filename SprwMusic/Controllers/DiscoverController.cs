@@ -17,11 +17,6 @@ namespace SprwMusic.Controllers
         {
             _discover = new Discover();
         }
-        // GET: Discover
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public string GetPlaylist( int page )
         {

@@ -1,0 +1,23 @@
+﻿
+<img src="#" alt=""/>
+<h4>BAND PHOTO</h4>
+<div ng-click="addPhoto()"><span class="glyphicon glyphicon-plus"></span>Upload photo</div>
+<br/>
+<label for="bandName">Artist Name</label>
+<input id="bandName" type="text" ng-model="artist.name"/>
+<label for="bandDescription">Artist Description</label>
+<input id="bandDescription" type="text" ng-model="artist.description"/>
+
+<h2>Band Members</h2>
+<div ng-repeat="member in artist.members">{{member.firstName}} {{member.lastName}} <span>{{member.role}}</span></div>
+<span ng-click="addMember"><span class="glyphicon glyphicon-plus"></span>Add Member</span>
+
+<h2>Genres</h2>
+<span ng-repeat="genre in artist.genres"><span class="glyphicon glyphicon-remove" ng-click="removeGenre(genre.id)"></span>{{genre.name}}</span>
+<div>Select an image file: <input type="file" id="fileInput" /></div>
+<div class="cropArea">
+    <img-crop image="myImage" result-image="image.Image"></img-crop>
+</div>
+<div>Cropped Image:</div>
+<div><img ng-src="{{image.Image}}" /></div>
+<input type="submit" ng-click="createImage(image)"/>

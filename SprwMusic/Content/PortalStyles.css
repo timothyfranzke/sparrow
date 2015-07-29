@@ -1,0 +1,34 @@
+﻿@charset "UTF-8";
+/* CSS Document */
+
+body{width:100%; margin:0 auto; padding:0 auto; font-family:arial; background:url(http://franzkedesign.com/sparrow/i/fabric.jpg) repeat #DFDFDF;}
+
+.clear{clear:both;}
+
+#artist-header{width: 100%; margin:0 auto; background:url(http://franzkedesign.com/sparrow/i/header-bg.jpg) no-repeat top left #ae2a02; background-size:100% auto; position:fixed; top:0; left:0; z-index:200; border-botom:1px solid #a33412;}
+
+.settings{background:url(http://franzkedesign.com/sparrow/i/gear.png) no-repeat center center #7c1c00; float:right; width:50px; height:50px; border-left:1px solid #a02907; margin-left:20px;}
+
+.artist-logo{padding-left:40px; padding-top:7px; float:left;}
+.artist-nav{padding:4px 0; margin-left:20px; float:left; padding-top:16px;}
+.artist-back{margin-right:5px;}
+.artist-forward{margin-left:5px;}
+
+.searchBar{float:left; padding-top:7px;}
+#search{width:215px; border:1px solid #ba4425; height:30px; color:#252525; background:url(http://franzkedesign.com/sparrow/i/search.png) no-repeat #FFFFFF; background-position:5px center; padding-left:30px; margin-left:20px;}
+
+.userInfo{float:right; color:#FFF; padding-top:17px; font-size:14px;}
+.profilePhoto{float:left; margin-right:8px; margin-top:-13px; width:38px; height:38px; border:1px solid #a6371b; overflow:hidden; text-align:center;}
+
+#menuBar{background:#581400; position:fixed; top:0; left:0; z-index:100; height:100%; width:290px;}
+#menuBar ul{list-style-type:none; padding:0; margin:51px 0 0;}
+#menuBar ul li{display:block;}
+#menuBar ul li a{display:block; padding:15px 10%; width:80%; color:#FFF; text-decoration:none; border-bottom:1px solid #611e0a; font-size:16px;}
+.activeNav{background:#821b00;}
+
+#controlBar{width:100%; position:fixed; bottom:0; left:0; background:#e7e7e7; border:1px solid #d2d2d2; z-index:300; height:85px;}
+.trackNav{float:left; padding:10px 56px; border-right:1px solid #d2d2d2;}
+#prev, #next{width:45px; height:45px; background-repeat:no-repeat; background-position:center center; display: inline-block; border:2px solid #b32a00; border-radius:100%; margin:0 2px;}
+#prev{background-image:url(http://franzkedesign.com/sparrow/i/prev.png);}
+#next{background-image:url(http://franzkedesign.com/sparrow/i/next.png);}
+#play{width:57px; height:57px; background-repeat:no-repeat; background-position:center center; display: inline-block; background-image:url(../i/play.png); border:2px solid #b32a00;border-radius:100%; margin-bottom:-5px;}

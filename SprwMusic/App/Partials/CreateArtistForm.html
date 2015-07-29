@@ -1,0 +1,25 @@
+﻿<md-dialog aria-label="Create An Artist">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create An Artist</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="answer('not applicable')">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <br />
+    <b layout="row" layout-align="center center" class="md-padding">
+        <md-content layout="column" layout-padding layout-align="center center">
+            <md-input-container class="form-input">
+                <label><i class="glyphicon glyphicon-envelope"></i> Artist Name</label>
+                <input name="band-name" ng-model="artist.Name">
+            </md-input-container>
+            <md-input-container class="form-input">
+                <label><i class="glyphicon glyphicon-envelope"></i> Artist Description</label>
+                <input name="band-desc" ng-model="artist.Description">
+            </md-input-container>
+            <input type="submit" class="sprw-btn" ng-click="createArtist(artist)" value="Create Artist" />
+        </md-content>
+    </b>
+</md-dialog>

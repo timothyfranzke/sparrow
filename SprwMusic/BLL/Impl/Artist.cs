@@ -71,6 +71,11 @@ namespace SprwMusic.BLL.Impl
             return CreateArtistImgDirectory(model);
         }
 
+        public bool CreateartistImg(CreateImgBase64Model model)
+        {
+            return CreateArtistImgDirectory(model);
+        }
+
         public IEnumerable<ArtistListModel> GetArtists(string email)
         {
             var artists = _repository.GetArtists(email);
@@ -90,6 +95,20 @@ namespace SprwMusic.BLL.Impl
             return FileUtil.GetImgFile(artistId, null, null);
         }
 
+        public StatusModel RemoveGenre(int artistId, int genreId)
+        {
+            return _repository.RemoveGenre(artistId, genreId);
+        }
+
+        public StatusModel AddGenre(int artistId, int genreId)
+        {
+            return _repository.AddGenre(artistId, genreId);
+        }
+
+        public GenreViewModel GetGenres()
+        {
+            return _repository.GetGenres();
+        }
         private StatusModel CreateArtistDirectory(int id)
         {
             var dir = "/artists/" + id;
@@ -139,5 +158,29 @@ namespace SprwMusic.BLL.Impl
 
             return success;
         }
+
+        private bool CreateArtistImgDirectory(CreateImgBase64Model model)
+        {
+            var success = true;
+            var albums = String.Empty;
+            string dir = String.Format("/artists/{0}/img/", model.TrackingId);
+
+            var status = new StatusModel
+            {
+                Messages = new List<string>()
+            };
+            try
+            {
+                success = FileUtil.CreateDirectory(dir);
+                success = FileUtil.CreateImgFile(dir, model.Image64, model.TrackingId);
+            }
+            catch (Exception e)
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
     }
 }

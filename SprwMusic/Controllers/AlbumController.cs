@@ -22,7 +22,7 @@ namespace SprwMusic.Controllers
         public string GetAlbums(int artistId)
         {
             
-            return "";
+            return JsonConvert.SerializeObject(_album.GetAlbums(artistId));
         }
 
         // POST: Album/Create

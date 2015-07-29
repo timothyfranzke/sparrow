@@ -7,8 +7,8 @@
     };
 
 
-    $scope.CreateUser = function (user) {
-        AuthService.CreateUser(user).then(function (data) {
+    $scope.CreateUser = function(user) {
+        AuthService.CreateUser(user).then(function(data) {
             console.log(JSON.stringify(data));
             if (data.Authenticated) {
                 alert("you're in");
@@ -17,5 +17,5 @@
                 alert("you are out");
             }
         });
-    }
+    };
 });

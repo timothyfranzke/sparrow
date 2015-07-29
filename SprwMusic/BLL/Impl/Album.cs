@@ -66,6 +66,11 @@ namespace SprwMusic.BLL.Impl
             return FileUtil.GetImgFile(artistId, albumId, null);
         }
 
+        public AlbumViewModel GetAlbums(int artistId)
+        {
+            return _repository.GetAlbum(artistId);
+        }
+
         private StatusModel CreateAlbumDirectory(int artistId, int albumId)
         {
             var status = new StatusModel 

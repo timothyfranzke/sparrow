@@ -1,0 +1,27 @@
+﻿<md-dialog style="height: 600px; width:600px;">
+    <md-toolbar>
+        <h2>Add Track</h2>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-input-container>
+            <label>Track Title</label>
+            <input type="text" ng-model="track.TrackName" />
+        </md-input-container>
+        <md-input-container>
+            <label>Release Date</label>
+            <input type="date" ng-model="track.ReleaseDate" placeholder="Release Date" />
+        </md-input-container>
+        <md-input-container>
+            <label>Release Date</label>
+            <input type="date" ng-model="track.ReleaseDate" placeholder="Release Date" />
+        </md-input-container>
+        <div layout="row">
+            <input type="file" nv-file-select name="Track" ng-click="init()" uploader="uploader" /><br />
+        </div>
+    </md-dialog-content>
+    <div layout="row">
+        <md-button ng-click="uploadTrack(track)" class="md-primary">
+            Add Track
+        </md-button>
+    </div>
+</md-dialog>

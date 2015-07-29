@@ -69,8 +69,6 @@
           <Property Name="LAST_MAINT_USER_ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="LAST_MAINT_TIME" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_ARTIST_GENRE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SPRW_ARTIST_GENRE">
           <Key>
             <PropertyRef Name="ARTIST_ID" />
@@ -561,6 +559,7 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <EntitySet Name="SPRW_ALBUM_IMG" EntityType="Self.SPRW_ALBUM_IMG" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_ARTIST" EntityType="Self.SPRW_ARTIST" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_ARTIST_EVENT" EntityType="Self.SPRW_ARTIST_EVENT" Schema="SPRW" store:Type="Tables" />
+          <EntitySet Name="SPRW_ARTIST_GENRE" EntityType="Self.SPRW_ARTIST_GENRE" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_ARTIST_IMG" EntityType="Self.SPRW_ARTIST_IMG" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_ARTIST_MEMBER" EntityType="Self.SPRW_ARTIST_MEMBER" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_GENRE" EntityType="Self.SPRW_GENRE" Schema="SPRW" store:Type="Tables" />
@@ -572,12 +571,6 @@ warning 6002: The table/view 'SparrowMusic.SPRW.SPRW_TRACK_POPULAR_SKIPS' does n
           <EntitySet Name="SPRW_TRACK_POPULAR_LIKES" EntityType="Self.SPRW_TRACK_POPULAR_LIKES" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_USER" EntityType="Self.SPRW_USER" Schema="SPRW" store:Type="Tables" />
           <EntitySet Name="SPRW_USER_ARTIST_FOLLOW" EntityType="Self.SPRW_USER_ARTIST_FOLLOW" Schema="SPRW" store:Type="Tables" />
-          <EntitySet Name="SPRW_ARTIST_GENRE" EntityType="Self.SPRW_ARTIST_GENRE" store:Type="Tables" store:Schema="SPRW">
-            <DefiningQuery>SELECT 
-    [SPRW_ARTIST_GENRE].[ARTIST_ID] AS [ARTIST_ID], 
-    [SPRW_ARTIST_GENRE].[GENRE_ID] AS [GENRE_ID]
-    FROM [SPRW].[SPRW_ARTIST_GENRE] AS [SPRW_ARTIST_GENRE]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="SPRW_ARTIST_POP_ARTIST" EntityType="Self.SPRW_ARTIST_POP_ARTIST" store:Type="Tables" store:Schema="SPRW">
             <DefiningQuery>SELECT 
     [SPRW_ARTIST_POP_ARTIST].[ARTIST_ID] AS [ARTIST_ID], 

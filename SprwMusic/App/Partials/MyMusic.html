@@ -1,0 +1,88 @@
+﻿<md-toolbar class="md-theme-light">
+    <div layout="row">
+        <img ng-src="{{selectedArtistImage}}" alt="artist image" width="90" height="90" />
+        <div flex="33">
+            <md-input-container>
+                <md-select ng-model="artist" ng-change="switchArtist(artist)" aria-label="genre">
+                    <md-option ng-repeat="artist in artists" value="{{artist.ArtistId}}">{{artist.ArtistName}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+</md-toolbar>
+<md-content>
+    <div>
+        <div layout="row" ng-show="noArtists">
+            <div><h5>Looks like you don't have any artists. Create a new artist by clicking the link below</h5></div>
+            <div>
+                <md-button class="md-primary md-raised" ng-click="showAdvanced($event)" flex flex-md="100">
+                    Create Artist
+                </md-button>
+            </div>
+        </div>
+        <div layout="row">
+
+
+            <div layout="column" flex="75">
+                <div ng-hide="noArtists" layout="row" layout-margin layout-fill layout-padding>
+                    <div flex="33">
+                        <md-input-container>
+                            <h4>{{selectedArtist.Description}}</h4>
+                        </md-input-container>
+                    </div>
+                    <div flex="33">
+                        <md-button class="md-fab md-primary md-hue-2" aria-label="Profile" ng-click="showAlbumDialog($event)">
+                            <md-icon md-svg-src="i/compactdisc3.svg"></md-icon>
+                        </md-button>
+                        <label>Albums</label>
+                        <ul>
+                            <li ng-repeat="album in selectedArtist.Albums">{{album.AlbumName}}</li>
+                        </ul>
+                    </div>
+                    <div flex="33">
+                        <md-button class="md-fab md-accent" aria-label="Profile" ng-click="showTrackDialog($event)">
+                            <md-icon md-svg-src="i/cassette7.svg"></md-icon>
+                        </md-button>
+                        <label>Tracks</label>
+                        <ul>
+                            <div ng-repeat="album in selectedArtist.Albums">
+                                <li ng-repeat="track in album.Tracks"><strong></strong>{{track.TrackName}} <em>({{album.AlbumName}})</em></li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div flex="25" layout="column">
+                <div>
+                    <label>Genres</label>
+                    <md-input-container>
+                        <md-select ng-model="genre" ng-change="addGenre(genre)" aria-label="genre">
+                            <md-option ng-repeat="genre in genres" value="{{genre}}">{{genre.Genre}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-chips class="custom-chips" ng-model="selectedGenres" readonly="ctrl.readonly">
+                        <md-chip-template>
+                            <span>
+                                <strong>{{$chip}}</strong>
+                            </span>
+                        </md-chip-template>
+                        <button md-chip-remove class="md-primary vegetablechip" ng-click="removeGenre(genre)">
+                            <md-icon md-svg-icon="md-close"></md-icon>
+                        </button>
+                    </md-chips>
+                </div>
+                <div>
+                    
+                    <md-button class="md-fab md-primary md-hue-2" aria-label="Profile" ng-click="showEventDialog($event)">
+                        <md-icon md-svg-src="i/calendar98.svg"></md-icon>
+                    </md-button>
+                    <label>Events</label>
+                    <ul>
+                        <li ng-repeat="event in selectedArtist.Events">{{event.EventDate}} {{event.Name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <md-button flex="50" class="md-primary md-raised" ng-click="showListBottomSheet($event)">Show as List</md-button>
+    </div>
+</md-content>

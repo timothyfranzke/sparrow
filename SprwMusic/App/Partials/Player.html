@@ -1,0 +1,191 @@
+﻿<md-toolbar layout="row" flex="33" layout-align="space-around left" class="md-tall md-accent">
+    <img class="logo-large" src="/Content/Images/logo-wo-words.png" height="95%" />
+    <div flex="33" layout-align="space-around left">
+        <h1 class="md-display-3 text-white logo">sparrow</h1>
+
+    </div>
+</md-toolbar>
+<md-content>
+    <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-swipe-content="true" md-dynamic-height>
+        <md-tab label="Discover">
+            <md-content class="md-padding">
+                <md-grid-list md-cols-sm="3" md-cols-md="6" md-cols-gt-md="6"
+                              md-row-height-gt-md="1:1" md-row-height="2:2"
+                              md-gutter="12px" md-gutter-gt-sm="8px">
+                    <md-grid-tile class="orange md-whiteframe-z2"
+                                  md-rowspan="1" md-colspan="1" md-colspan-sm="1" ng-repeat="item in playlist">
+                        <!--height="147"-->
+                        <img src="/Track/GetImageFile?artistId={{item.ArtistId}}&albumId=0&trackId=0" width="100%" height="100%" ng-click="play(item)" />
+                        <md-grid-tile-footer>
+                            <h3>{{item.ArtistName}}</h3>
+                        </md-grid-tile-footer>
+                    </md-grid-tile>
+                </md-grid-list>
+            </md-content>
+        </md-tab>
+        <md-tab label="Events">
+            <md-content class="md-padding">
+                <md-list>
+                    <md-subheader class="md-no-sticky">3 line item</md-subheader>
+                    <md-list-item class="md-3-line" ng-repeat="item in playlist">
+                        <img src="/Track/GetImageFile?artistId={{item.ArtistId}}&albumId=0&trackId=0" width="100%" height="100%" class="face" ng-click="player.play(item)" />
+
+                        <div class="md-list-item-text">
+                            <h3>{{ item.ArtistName }}</h3>
+                            <h4>Show at the Granada</h4>
+                            <p>08/08/15</p>
+                        </div>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                </md-list>
+            </md-content>
+        </md-tab>
+        <!--md-tab label="{{selectedArtist.ArtistName}}" ng-show="showArtist">
+            <md-toolbar class="md-theme-light">
+                <img src="/Track/GetImageFile?artistId={{selectedArtist.ArtistId}}&albumId=0&trackId=0" ng-click="player.play(item)" />
+                <h2 class="md-toolbar-tools"></h2>
+                <h4>Albums</h4>
+
+            </md-toolbar>
+            <md-content>
+
+            </md-content>
+        </md-tab-->
+        <md-tab label="MyMusic">
+            <div ng-controller="mymusicController">
+                <md-toolbar class="md-theme-light">
+                    <h4>Artists</h4>
+                </md-toolbar>
+                <md-content>
+                    <div layout="row">
+                        <div layout="column" ng-show="noArtists">
+                            <div><h5>Looks like you don't have any artists. Create a new artist by clicking the link below</h5></div>
+                            <div>
+                                <md-button class="md-primary md-raised" ng-click="showAdvanced($event)" flex flex-md="100">
+                                    Create Artist
+                                </md-button>
+                            </div>
+                        </div>
+                        <div layout="column" flex="25">
+                            <md-select ng-model="artist" ng-change="switchArtist(artist)" aria-label="genre">
+                                <md-option ng-repeat="artist in artists" value="{{artist.ArtistId}}">{{artist.ArtistName}}</md-option>
+                            </md-select>
+                            {{selectedArtist.ArtistDescription}}
+                            <img ng-src="{{selectedArtistImage}}" alt="artist image" width="300" height="300" />
+
+                        </div>
+                        <div layout="column" flex="25">
+                            <h2>
+                                Albums
+
+                                <md-button class="md-icon-button" aria-label="More">
+                                    <md-icon md-svg-src="/Content/Images/svg/add186.svg" ng-click="showAlbumDialog($event)"></md-icon>
+                                </md-button>
+                            </h2>
+                            <ul>
+                                <li ng-repeat="album in selectedArtist.Albums">{{album.AlbumName}}</li>
+                            </ul>
+                            <!--md-list>
+                                <md-subheader class="md-no-sticky">
+                                    Album Name
+
+                                </md-subheader>
+                                <md-list-item class="md-3-line">
+                                    Album name
+                                </md-list-item>
+                                </!--md-list-->
+                        </div>
+                        <div layout="column" flex="25">
+                            <h4>
+                                Tracks <md-button class="md-icon-button" aria-label="More">
+                                           <md-icon md-svg-src="/Content/Images/svg/add186.svg" ng-click="showTrackDialog($event)"></md-icon>
+                                       </md-button>
+                            </h4>
+
+                            <ul>
+                                <div ng-repeat="album in selectedArtist.Albums">
+                                    <li ng-repeat="track in album.Tracks"><strong></strong>{{track.TrackName}} <em>({{album.AlbumName}})</em></li>
+                                </div>
+                            </ul>
+                        </div>
+                        <div layout="column" flex="25">
+                            <h4 ng-click="showEventDialog($event)">Events</h4>
+                            <ul>
+                                <li ng-repeat="event in events">{{event.data}} {{event.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div layout="row">
+                        <div layout="column" offset="33" flex="33">
+                            <h4>Genres</h4>
+                            <label>Size</label>
+                            <md-input-container>
+                                <md-select ng-model="genre" ng-change="addGenre(genre)" aria-label="genre">
+                                    <md-option ng-repeat="genre in genres" value="{{genre}}">{{genre.Genre}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-chips class="custom-chips" ng-model="selectedGenres" readonly="ctrl.readonly">
+                                <md-chip-template>
+                                    <span>
+                                        <strong>{{$chip}}</strong>
+                                    </span>
+                                </md-chip-template>
+                                <button md-chip-remove class="md-primary vegetablechip" ng-click="removeGenre(genre)">
+                                    <md-icon md-svg-icon="md-close"></md-icon>
+                                </button>
+                            </md-chips>
+                        </div>
+                        <div layout="column" flex="33">
+                            <h4>Members</h4>
+                        </div>
+                    </div>
+                </md-content>
+            </div>
+        </md-tab>
+    </md-tabs>
+</md-content>
+
+
+<md-content class="footer" layout="row" layout-align="left center" class="md-accent">
+    
+    <md-toolbar class="md-toolbar-tools">
+        <!--mg src="/Track/GetImageFile?artistId={{player.current.ArtistId}}&albumId={{player.current.AlbumId}}&trackId={{player.current.TrackId}}" height="90%" class="face" ng-click="player.play(item)" /-->
+        <md-button class="md-fab md-accent" aria-label="Profile" ng-click="buttonPlay()">
+            <md-icon md-svg-src="i/pause44.svg" ng-show="pause"></md-icon>
+            <md-icon md-svg-src="i/play106.svg" ng-show="playing"></md-icon>
+        </md-button>
+        <md-button class="md-fab md-accent" aria-label="Profile" ng-click="player.next()" >
+            <md-icon md-svg-src="i/play109.svg"></md-icon>
+        </md-button>
+        <md-fab-speed-dial md-open="demo.isOpen" md-direction="{{demo.selectedDirection}}"
+                           ng-class="demo.selectedMode">
+            <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab md-accent">
+                    <md-icon md-svg-src="i/filter18.svg"></md-icon>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="twitter" class="md-fab md-raised md-mini md-accent hue-2" ng-click="showGridBottomSheet($event)">
+                    <md-icon md-svg-src="i/king3.svg"></md-icon>
+                </md-button>
+                <md-button aria-label="facebook" class="md-fab md-raised md-mini">
+                    <md-icon md-svg-src="img/icons/facebook.svg"></md-icon>
+                </md-button>
+                <md-button aria-label="Google hangout" class="md-fab md-raised md-mini">
+                    <md-icon md-svg-src="img/icons/hangout.svg"></md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+        <!--md-button aria-label="feather" class="md-fab md-raised md-mini md-primary md-hue-1">
+            <md-icon md-svg-src="i/pen43.svg"></md-icon>
+        </!--md-button>
+        <md-button aria-label="feather" class="md-fab md-raised md-mini md-primary md-hue-1">
+            <md-icon md-svg-src="i/hand6.svg"></md-icon>
+        </md-button-->
+
+    </md-toolbar>
+</md-content>
+<div class="overlay" ng-show="showSpinner">
+    <md-progress-circular class="loader md-accent" md-mode="indeterminate"></md-progress-circular>
+    {{loadingMessage}}
+</div>
